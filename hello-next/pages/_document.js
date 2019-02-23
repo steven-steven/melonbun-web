@@ -10,6 +10,7 @@ const scripts = (
 )
 
 export default class MyCustomDocument extends Document {
+  
   static getInitialProps ({ renderPage }) {
     const sheet = new ServerStyleSheet()
     let pageContext;
@@ -46,7 +47,6 @@ export default class MyCustomDocument extends Document {
     return (
       <html>
         <Head>
-          <title>Mellonbun</title>
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
