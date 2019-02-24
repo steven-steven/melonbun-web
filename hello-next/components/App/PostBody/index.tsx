@@ -1,14 +1,14 @@
 import {withRouter} from 'next/router'
 
 interface IProps {
-    router: any
+    title:string
 }
 
-const PostBody = withRouter((props: IProps) => (
+const PostBody = ({title}: IProps) => (
     <div>
-        <h1>{props.router.query.title}</h1>
+        <h1>{title}</h1>
         <p>This is the blog post content.</p>
     </div>
-))
+)
 
 export default PostBody

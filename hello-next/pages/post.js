@@ -1,15 +1,21 @@
 
 import PostBody from '../components/App/PostBody/index'
 import Layout from '../components/App/Layout/index'
+import {withRouter} from 'next/router'
+
 
 // interface IProps {
-//   itemsBuffer: Array<any>
-// }
+//   router: {
+//     query: {
+//       title: string;
+//     }
+//   }
+//}
 
-const post = (props) => (
+const Post = ({router}) => (
   <Layout>
-    <PostBody />
+    <PostBody title={router.query.title}/>
   </Layout>
 )
 
-export default post;
+export default withRouter(Post);

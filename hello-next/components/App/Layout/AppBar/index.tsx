@@ -1,8 +1,7 @@
-import Link from 'next/link';
+
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -10,6 +9,8 @@ import PopupMenu from './PopupMenu';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import {drawerWidth} from '../header_constants';
+import MuiLink from '@material-ui/core/Link';
+import {NextLink} from '../../../Shared/nextLink';
 
 const styles = (theme:any)=> ({
     root: {
@@ -29,8 +30,11 @@ const styles = (theme:any)=> ({
         duration: theme.transitions.duration.enteringScreen,
       }),
     },
+    grow: {
+        flexGrow: 1,
+    },
     menuButton: {
-      marginLeft: 12,
+      marginLeft: -12,
       marginRight: 20,
     },
     hide: {
@@ -47,8 +51,10 @@ interface IProps {
         appBarShift: string;
         hide: string;
         menuButton: string;
+        grow: string;
     }
 }
+  
 const HomeBody = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}: IProps) => {
     return (
         <AppBar 
@@ -66,10 +72,10 @@ const HomeBody = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}: IProp
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" color="inherit">
+                <MuiLink component={NextLink} href={'/'} variant="h6" color="inherit" underline="none" className={classes.grow}>
                     MelonBun
-                </Typography>
-                {!isLoggedIn && (<PopupMenu anchorEl={'left'}/>) }
+                </MuiLink>
+                {!isLoggedIn && (<PopupMenu/>) }
             </Toolbar>
         </AppBar>
     )
