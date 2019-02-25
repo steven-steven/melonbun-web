@@ -3,6 +3,7 @@
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import PopupMenu from './PopupMenu';
@@ -11,6 +12,7 @@ import classNames from 'classnames';
 import {drawerWidth} from '../header_constants';
 import MuiLink from '@material-ui/core/Link';
 import {NextLink} from '../../../Shared/nextLink';
+import CreateItemPost from '../../../Shared/Dialogs/CreateItemPost';
 
 const styles = (theme:any)=> ({
     root: {
@@ -46,6 +48,7 @@ interface IProps {
     isLoggedIn: boolean;
     handleDrawerToggle: any; 
     isDrawerOpen: boolean;
+    onItemCreate: (newForm:any) => void;
     classes: {
         appBar: string;
         appBarShift: string;
@@ -55,7 +58,7 @@ interface IProps {
     }
 }
   
-const HomeBody = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}: IProps) => {
+const HomeBody = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen, onItemCreate}: IProps) => {
     return (
         <AppBar 
             position="fixed"
@@ -72,9 +75,12 @@ const HomeBody = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}: IProp
                 >
                     <MenuIcon />
                 </IconButton>
-                <MuiLink component={NextLink} href={'/'} variant="h6" color="inherit" underline="none" className={classes.grow}>
-                    MelonBun
-                </MuiLink>
+                <div className={classes.grow}>
+                    <MuiLink component={NextLink} href={'/'} variant="h6" color="inherit" underline="none">
+                        MelonBun
+                    </MuiLink>
+                </div>
+                <CreateItemPost onItemCreate={onItemCreate}/>
                 {!isLoggedIn && (<PopupMenu/>) }
             </Toolbar>
         </AppBar>

@@ -5,6 +5,8 @@ import React from 'react';
 import classNames from 'classnames';
 import {drawerWidth} from './header_constants';
 import DrawerComponent from './Drawer/index';
+import {connect} from 'react-redux';
+import {onItemCreate} from '../../../redux/actionCreators/CardActions';
 
 const layoutStyle = (theme:any)=> ({
   root: {
@@ -42,6 +44,7 @@ interface IProps {
     contentShift: String;
     drawerHeader: string;
   };
+  onItemCreate: (newForm:any) => void;
 }
 interface IState {
   isDrawerOpen: boolean;
@@ -62,7 +65,7 @@ class Layout extends React.Component<IProps, IState>{
   }
   
   render() {
-    const { classes } = this.props;
+    const { classes, onItemCreate } = this.props;
     const { isDrawerOpen ,isLoggedIn } = this.state;
 
     return (
@@ -74,7 +77,8 @@ class Layout extends React.Component<IProps, IState>{
           <AppBar 
             handleDrawerToggle = {this.handleDrawerToggle}
             isDrawerOpen = {isDrawerOpen}
-            isLoggedIn = {isLoggedIn}  
+            isLoggedIn = {isLoggedIn} 
+            onItemCreate = {onItemCreate} 
           />
           <DrawerComponent
             show = {isDrawerOpen}
@@ -94,4 +98,12 @@ class Layout extends React.Component<IProps, IState>{
   }
 }
 
-export default withStyles(layoutStyle)(Layout);
+const mapStateToProps = (state)=>{
+  return {
+    itemsBuffer: state.itemsBuffer
+  }
+}
+const mapDispatchToProps = {
+  onItemCreate
+}
+export default withStyles(layoutStyle)( connect(mapStateToProps, mapDispatchToProps)(Layout) );

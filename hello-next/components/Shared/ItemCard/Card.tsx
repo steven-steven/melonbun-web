@@ -1,18 +1,20 @@
-import Link from 'next/link'
 import { withStyles } from '@material-ui/core/styles';
 import {NextLink} from '../nextLink'
 
+import IconButton from '@material-ui/core/IconButton';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button, {ButtonProps} from '@material-ui/core/Button';
+import CardActionArea, {CardActionAreaProps} from '@material-ui/core/CardActionArea';
+import Button from '@material-ui/core/Button';
+import Delete from '@material-ui/icons/Delete';
+
 
 const cardStyle = (theme:any)=> ({
     card: {
-        maxWidth: 400,
+        width: 280,
     },
     media: {
         height: 140,
@@ -20,25 +22,27 @@ const cardStyle = (theme:any)=> ({
 });
 
 interface IProps {
-    key: number,
-    id: number,
+    id: number;
     title: string;
+    description: string;
     classes: {
         card: string;
-        media:string;
+        media: string;
     }
+    onItemDelete?: (id:any) => void;
 }
 
-interface linkedButtonProps extends ButtonProps{
+interface linkedCardActionAreaProps extends CardActionAreaProps{
     hrefAs?:string
 }
-const LinkedButton: React.ReactType<linkedButtonProps> = Button;
+const LinkedCardActionArea: React.ReactType<linkedCardActionAreaProps> = CardActionArea;
 
 const PostLink = (props: IProps) => {
-    const {key, id, title, classes} = props;
+    const {id, title, description, classes, onItemDelete} = props;
     return(
-        <Card key={key} className={classes.card}>
-            <CardActionArea>
+        <Card className={classes.card}>
+            
+            <LinkedCardActionArea component={NextLink} hrefAs={`/p/${id}`} href={`/post?title=${title}`}>
                 <CardMedia
                     className={classes.media}
                     image="/static/images/cards/apple.jpg"
@@ -46,22 +50,26 @@ const PostLink = (props: IProps) => {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
+                        {title}
                     </Typography>
                     <Typography component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
+                        {description}
                     </Typography>
                 </CardContent>
-            </CardActionArea>
-            <CardContent>
-                <Typography variant="h5" component="h2">
-                    {title}
-                </Typography>
-            </CardContent>
+            </LinkedCardActionArea>
+
             <CardActions>
-                <LinkedButton component={NextLink} hrefAs={`/p/${id}`} href={`/post?title=${title}`} size="small">Learn More</LinkedButton>
+                <Button size="small" color="primary">
+                    Share
+                </Button>
+                {
+                    onItemDelete && 
+                    (<IconButton onClick={()=> onItemDelete(id)}>
+                        <Delete/>
+                    </IconButton>)
+                }
             </CardActions>
+            
         </Card>
         
     )

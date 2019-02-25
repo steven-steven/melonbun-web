@@ -5,11 +5,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Drawer from '@material-ui/core/Drawer';
-
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Delete from '@material-ui/icons/Delete';
 import {drawerWidth} from '../header_constants';
 
 const drawerStyle = (theme:any)=> ({
@@ -59,18 +60,21 @@ const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
                 </div>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    {['Home', 'Chat', 'Your Cart', 'Saved Items'].map((text, index) => (
                         <ListItem button key={text}>
+                            <ListItemIcon>
+                                <Delete/>
+                            </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
                 </List>
                 <Divider />
                 <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemText primary={text} />
-                    </ListItem>
+                    {['Post Requests', 'Fulfill Requests', 'Settings'].map((text, index) => (
+                        <ListItem button key={text}>
+                            <ListItemText primary={text} />
+                        </ListItem>
                     ))}
                 </List>
                     

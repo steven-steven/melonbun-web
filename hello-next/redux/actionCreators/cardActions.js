@@ -1,10 +1,9 @@
-// export const removeProject = (id) => ({
-//   id,
-//   type: 'REMOVE_PROJECT'
-// });
+export const onItemCreate = (newItem) => ({
+  newItem,
+  type: 'CREATE_NEW_MYITEM'
+});
 
-// export const addProjectEntry = (id, contents) => ({
-//   id,
-//   contents,
-//   type: 'ADD_PROJECTENTRY'
-// });
+export const onItemDelete = (id, contents) => ({
+  id,
+  type: 'DELETE_MYITEM'
+});
