@@ -2,15 +2,21 @@ import { SheetsRegistry } from 'jss';
 import { createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
+  palette: {
+    //type: 'dark',
+    primary: {
+        //light: '#61cf6c',
+        main: '#61cf6c',
+        //dark: '#39bb46'
+    },
+    secondary: {
+      main: '#f4a900',
+    },
+  },
   overrides: {
     MuiButton: {
       root: {
-        fontWeight: "bold",
-        backgroundColor: "red",
-        margin: "10px",
-        "&:hover": {
-          backgroundColor: "green"
-        }
+        
       }
     }
   }
