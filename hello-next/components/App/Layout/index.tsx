@@ -14,12 +14,14 @@ const layoutStyle = (theme:any)=> ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: -drawerWidth,
+  },
+  contentSpacing: {
+    padding: theme.spacing.unit * 3,
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
@@ -41,9 +43,11 @@ interface IProps {
   classes: {
     root: string;
     content: string;
-    contentShift: String;
+    contentShift: string;
     drawerHeader: string;
+    contentSpacing: string;
   };
+  hasTabLayout: boolean;
   onItemCreate: (newForm:any) => void;
 }
 interface IState {
@@ -52,6 +56,10 @@ interface IState {
 };
 
 class Layout extends React.Component<IProps, IState>{
+  static defaultProps = {
+    hasTabLayout: false
+  }
+
   constructor(props: IProps) {
     super(props);
     this.state = {isDrawerOpen: false, isLoggedIn: false};
@@ -65,7 +73,7 @@ class Layout extends React.Component<IProps, IState>{
   }
   
   render() {
-    const { classes, onItemCreate } = this.props;
+    const { classes, onItemCreate, hasTabLayout } = this.props;
     const { isDrawerOpen ,isLoggedIn } = this.state;
 
     return (
@@ -86,7 +94,8 @@ class Layout extends React.Component<IProps, IState>{
           />
           <main 
             className={classNames(classes.content, 
-              {[`${classes.contentShift}`]: isDrawerOpen}
+              {[`${classes.contentShift}`]: isDrawerOpen},
+              {[`${classes.contentSpacing}`]: !hasTabLayout}
             )}
           >
             <div className={classes.drawerHeader} />
@@ -100,7 +109,7 @@ class Layout extends React.Component<IProps, IState>{
 
 const mapStateToProps = (state)=>{
   return {
-    itemsBuffer: state.itemsBuffer
+    itemsBuffer: state.itemReducer.itemsBuffer
   }
 }
 const mapDispatchToProps = {
