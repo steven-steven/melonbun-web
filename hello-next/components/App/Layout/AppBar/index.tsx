@@ -58,7 +58,7 @@ interface IProps {
     }
 }
   
-const HomeBody = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen, onItemCreate}: IProps) => {
+const AppBarComponent = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen, onItemCreate}: IProps) => {
     return (
         <AppBar 
             position="fixed"
@@ -87,4 +87,4 @@ const HomeBody = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen, onItem
     )
 }
 
-export default withStyles(styles)(HomeBody)
+export default withStyles(styles)(AppBarComponent)

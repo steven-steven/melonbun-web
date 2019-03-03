@@ -22,7 +22,7 @@ const cardStyle = (theme:any)=> ({
 });
 
 interface IProps {
-    id: number;
+    id: string;
     title: string;
     description: string;
     classes: {
@@ -32,6 +32,7 @@ interface IProps {
     onItemDelete?: (id:any) => void;
 }
 
+//attach prop:hrefAs to existing CardActionAreaProps
 interface linkedCardActionAreaProps extends CardActionAreaProps{
     hrefAs?:string
 }

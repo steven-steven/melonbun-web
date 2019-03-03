@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Delete from '@material-ui/icons/Delete';
 import {drawerWidth} from '../header_constants';
+import {NextLink} from '../../../Shared/nextLink';
 
 const drawerStyle = (theme:any)=> ({
     drawerHeader: {
@@ -40,6 +41,17 @@ interface IProps {
     handleDrawerToggle: any;
 }
 
+const myPages = [
+    {'text':'Home', 'href':'#'},
+    {'text':'Chat', 'href':'#'},
+    {'text':'YourCart', 'href':'#'},
+    {'text':'Saved Items', 'href':'#'},
+]
+const otherPages = [
+    {'text':'Post Requests', 'href':'#'},
+    {'text':'Fulill Requests', 'href':'/request'},
+    {'text':'Settings', 'href':'#'},
+]
 const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
 
     return(
@@ -60,20 +72,20 @@ const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
                 </div>
                 <Divider />
                 <List>
-                    {['Home', 'Chat', 'Your Cart', 'Saved Items'].map((text, index) => (
-                        <ListItem button key={text}>
+                    {myPages.map((linkItem, index) => (
+                        <ListItem button key={linkItem.text} component={NextLink} href={linkItem.href}>
                             <ListItemIcon>
                                 <Delete/>
                             </ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemText primary={linkItem.text} />
                         </ListItem>
                     ))}
                 </List>
                 <Divider />
                 <List>
-                    {['Post Requests', 'Fulfill Requests', 'Settings'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemText primary={text} />
+                    {otherPages.map((linkItem, index) => (
+                        <ListItem button key={linkItem.text} component={NextLink} href={linkItem.href}>
+                            <ListItemText primary={linkItem.text} />
                         </ListItem>
                     ))}
                 </List>
