@@ -1,4 +1,4 @@
-import ItemCard from '../../Shared/ItemCard/Card';
+import RequestCard from '../../Shared/RequestCard/index';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -15,15 +15,17 @@ const RequestBody = (props: IProps) => {
         <>
             <Typography component="h3" variant="h3" gutterBottom>The Requests</Typography>
             <Grid container spacing={24}>
-                {requestBuffer.map(item =>{
+                {requestBuffer.map(request =>{
                     return ( 
-                        <Grid key={item.id} item xs={12}>
+                        <Grid key={request.id} item xs={12}>
                             <Paper>
-                                <ItemCard 
-                                    onItemDelete={()=>{}} 
-                                    id={item.id} 
-                                    title={item.title} 
-                                    description={item.description}
+                                <RequestCard 
+                                    date={request.date}
+                                    requesterUser={request.requesterUser}
+                                    fulfilled={request.fulfilled}
+                                    id={request.id} 
+                                    title={request.title} 
+                                    description={request.description}
                                 />
                             </Paper>
                         </Grid>
