@@ -43,14 +43,14 @@ interface IProps {
 }
 
 const myPages = [
-    {'text':'Home', 'href':'#', 'icon':'home'},
+    {'text':'Home', 'href':'/', 'icon':'home'},
     {'text':'Chat', 'href':'#', 'icon':'chat'},
     {'text':'YourCart', 'href':'#', 'icon':'shopping_cart'},
     {'text':'Saved Items', 'href':'#', 'icon':'star'},
 ]
 const otherPages = [
-    {'text':'Post Requests', 'href':'#'},
-    {'text':'Fulill Requests', 'href':'/request'},
+    {'text':'Post Requests', 'href':'/request'},
+    {'text':'Fullfill Requests', 'href':'/request'},
     {'text':'Settings', 'href':'#'},
 ]
 const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
