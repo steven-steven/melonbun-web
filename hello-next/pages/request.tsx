@@ -6,15 +6,30 @@ import RequestBody from '../components/App/RequestBody/index'
 import FavoritesBody from '../components/App/FavoritesBody/index'
 import {connect} from 'react-redux';
 import {IRequestInfo} from '../redux/dataTypes/request'
-
+import {onAddFavoriteRequest, onRemoveFavoriteRequest} from '../redux/actionCreators/profileActions';
 
 interface IProps {
-    requestBuffer:IRequestInfo[]
+    requestBuffer:IRequestInfo[];
+    favoriteRequests: string[];
+    onAddFavoriteRequest: (requestId:string) => void;
+    onRemoveFavoriteRequest: (requestId:string) => void;
 }
 
-const Request: SFC<IProps> = ({ requestBuffer }) => {
-    const RequestPage = <RequestBody requestBuffer={requestBuffer}/>
-    const FavoritesPage = <FavoritesBody/>
+const Request = (props:IProps) => {
+    const { requestBuffer, favoriteRequests, onAddFavoriteRequest, onRemoveFavoriteRequest } = props;
+
+    const RequestPage = <RequestBody 
+        requestBuffer={requestBuffer} 
+        favoriteRequests={favoriteRequests}
+        onAddFavoriteRequest={onAddFavoriteRequest}
+        onRemoveFavoriteRequest={onRemoveFavoriteRequest}
+    />
+    const FavoritesPage = <FavoritesBody
+        requestBuffer={requestBuffer} 
+        favoriteRequests={favoriteRequests}
+        onAddFavoriteRequest={onAddFavoriteRequest}
+        onRemoveFavoriteRequest={onRemoveFavoriteRequest}
+    />
     const tabContentList:ITabContent[] = [
         {title:'Requests', content:RequestPage, icon:'assignment'},
         {title:'Favorites', content:FavoritesPage, icon:'favorite'}
@@ -29,9 +44,12 @@ const Request: SFC<IProps> = ({ requestBuffer }) => {
 
 const mapStateToProps = (state)=>{
     return {
-        requestBuffer: state.requestReducer.requestBuffer
+        requestBuffer: state.requestReducer.requestBuffer,
+        favoriteRequests: state.profileReducer.favoriteRequests
     }
 }
 const mapDispatchToProps = {
+    onAddFavoriteRequest,
+    onRemoveFavoriteRequest
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Request);

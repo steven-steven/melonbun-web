@@ -5,7 +5,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea, {CardActionAreaProps} from '@material-ui/core/CardActionArea';
 import Divider from '@material-ui/core/Divider';
@@ -52,8 +51,10 @@ interface IProps extends IRequestInfo{
         flexGrow: string;
         requestInfo: string;
     }
-    onItemDelete?: (id:any) => void;
     likedRequests?: boolean;
+    isFavorite: boolean;
+    onAddFavoriteRequest: (requestId:string) => void;
+    onRemoveFavoriteRequest: (requestId:string) => void;
 }
 
 //attach prop:hrefAs to existing CardActionAreaProps
@@ -62,18 +63,28 @@ interface linkedCardActionAreaProps extends CardActionAreaProps{
 }
 const LinkedCardActionArea: React.ReactType<linkedCardActionAreaProps> = CardActionArea;
 
-const PostLink = (props: IProps) => {
-    const {id, date, title, description, requesterUser, fulfilled, classes, likedRequests=false, onItemDelete} = props;
+const RequestCard = (props: IProps) => {
+    const {id, date, title, description, requesterUser, fulfilled, classes, isFavorite, onAddFavoriteRequest, onRemoveFavoriteRequest} = props;
+    
+    const toggleFavorite = () =>{
+        if(isFavorite){
+            onRemoveFavoriteRequest(id);
+        }else{
+            onAddFavoriteRequest(id);
+        }
+    }
+    
     return(
         <Card className={classes.card}>
             <CardMedia
-                    className={classes.image}
-                    image="/static/images/cards/apple.jpg"
-                    title="Apple"
-                />
-            <LinkedCardActionArea component={NextLink} hrefAs={`/p/${id}`} href={`/post?title=${title}`}>
+                className={classes.image}
+                image="/static/images/cards/apple.jpg"
+                title="Apple"
+            />
+            
                 
-                <div className={classes.details}>
+            <div className={classes.details}>
+                <LinkedCardActionArea component={NextLink} hrefAs={`/p/${id}`} href={`/post?title=${title}`}>
                     <CardContent className={classes.flexGrow}>
                         <div className={classes.requestInfo}>
                             <Typography gutterBottom variant="caption" className={classes.flexGrow}>
@@ -90,21 +101,28 @@ const PostLink = (props: IProps) => {
                             {description}
                         </Typography>
                     </CardContent>
-                    <Divider variant="middle"/>
-                    <div className={classes.controls}>
-                        <Typography variant="subtitle2" component="p" className={classes.flexGrow}>
-                            <Icon>{likedRequests?"favorite": "favorite_border"}</Icon>
-                        </Typography>
-                        <Typography variant="subtitle2" component="p">
-                            {fulfilled?'fulfilled':'pending'}
-                        </Typography>
-                    </div>
+                </LinkedCardActionArea>
+                <Divider variant="middle"/>
+                <div className={classes.controls}>
+                    <Typography variant="subtitle2" component="p" className={classes.flexGrow}>
+                        <IconButton
+                            color="inherit" 
+                            aria-label="Open drawer"
+                            onClick={toggleFavorite}
+                        >
+                            <Icon>{isFavorite?"favorite": "favorite_border"}</Icon>
+                        </IconButton>
+                    </Typography>
+                    <Typography variant="subtitle2" component="p">
+                        {fulfilled?'fulfilled':'pending'}
+                    </Typography>
                 </div>
-            </LinkedCardActionArea>
+            </div>
+           
             
         </Card>
         
     )
 }
 
-export default withStyles(cardStyle)(PostLink)
+export default withStyles(cardStyle)(RequestCard)
