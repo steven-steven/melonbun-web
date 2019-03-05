@@ -1,5 +1,3 @@
-import {withRouter} from 'next/router'
-
 interface IProps {
     title:string
 }

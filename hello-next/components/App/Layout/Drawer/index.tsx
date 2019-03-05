@@ -13,6 +13,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Delete from '@material-ui/icons/Delete';
 import {drawerWidth} from '../header_constants';
 import {NextLink} from '../../../Shared/nextLink';
+import Icon from '@material-ui/core/Icon';
 
 const drawerStyle = (theme:any)=> ({
     drawerHeader: {
@@ -42,14 +43,14 @@ interface IProps {
 }
 
 const myPages = [
-    {'text':'Home', 'href':'#'},
-    {'text':'Chat', 'href':'#'},
-    {'text':'YourCart', 'href':'#'},
-    {'text':'Saved Items', 'href':'#'},
+    {'text':'Home', 'href':'/', 'icon':'home'},
+    {'text':'Chat', 'href':'#', 'icon':'chat'},
+    {'text':'YourCart', 'href':'#', 'icon':'shopping_cart'},
+    {'text':'Saved Items', 'href':'#', 'icon':'star'},
 ]
 const otherPages = [
-    {'text':'Post Requests', 'href':'#'},
-    {'text':'Fulill Requests', 'href':'/request'},
+    {'text':'Post Requests', 'href':'/request'},
+    {'text':'Fullfill Requests', 'href':'/request'},
     {'text':'Settings', 'href':'#'},
 ]
 const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
@@ -75,7 +76,7 @@ const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
                     {myPages.map((linkItem, index) => (
                         <ListItem button key={linkItem.text} component={NextLink} href={linkItem.href}>
                             <ListItemIcon>
-                                <Delete/>
+                                <Icon>{linkItem.icon}</Icon>
                             </ListItemIcon>
                             <ListItemText primary={linkItem.text} />
                         </ListItem>
