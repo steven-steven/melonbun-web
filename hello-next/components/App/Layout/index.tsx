@@ -48,7 +48,6 @@ interface IProps {
     contentSpacing: string;
   };
   hasTabLayout: boolean;
-  onItemCreate: (newForm:any) => void;
 }
 interface IState {
   isDrawerOpen: boolean;
@@ -73,7 +72,7 @@ class Layout extends React.Component<IProps, IState>{
   }
   
   render() {
-    const { classes, onItemCreate, hasTabLayout } = this.props;
+    const { classes, hasTabLayout } = this.props;
     const { isDrawerOpen ,isLoggedIn } = this.state;
 
     return (
@@ -85,8 +84,7 @@ class Layout extends React.Component<IProps, IState>{
           <AppBar 
             handleDrawerToggle = {this.handleDrawerToggle}
             isDrawerOpen = {isDrawerOpen}
-            isLoggedIn = {isLoggedIn} 
-            onItemCreate = {onItemCreate} 
+            isLoggedIn = {isLoggedIn}
           />
           <DrawerComponent
             show = {isDrawerOpen}
@@ -113,6 +111,6 @@ const mapStateToProps = (state)=>{
   }
 }
 const mapDispatchToProps = {
-  onItemCreate
+  
 }
 export default withStyles(layoutStyle)( connect(mapStateToProps, mapDispatchToProps)(Layout) );
