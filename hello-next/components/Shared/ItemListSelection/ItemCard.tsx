@@ -7,43 +7,38 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardActionArea, {CardActionAreaProps} from '@material-ui/core/CardActionArea';
-import Button from '@material-ui/core/Button';
-import Delete from '@material-ui/icons/Delete';
-
+import Button, {ButtonProps} from '@material-ui/core/Button';
+import {IItemInfo} from '../../../redux/dataTypes/item'
+import SelectableCard from '../Selectable/selectableCard';
 
 const cardStyle = (theme:any)=> ({
-    card: {
-        width: 280,
-    },
     media: {
         height: 140,
     },
 });
 
 interface IProps {
-    id: string;
-    title: string;
-    description: string;
+    active: boolean;
+    id: IItemInfo["id"];
+    title: IItemInfo["title"];
+    description: IItemInfo["description"];
     classes: {
-        card: string;
         media: string;
     }
-    onItemDelete?: (id:any) => void;
+    onItemSelect: (ref:React.RefObject<HTMLButtonElement>) => void;
 }
 
 //attach prop:hrefAs to existing CardActionAreaProps
-interface linkedCardActionAreaProps extends CardActionAreaProps{
+interface IlinkedButtonProps extends ButtonProps{
     hrefAs?:string
 }
-const LinkedCardActionArea: React.ReactType<linkedCardActionAreaProps> = CardActionArea;
+const LinkedButton: React.ReactType<IlinkedButtonProps> = Button;
 
 const PostLink = (props: IProps) => {
-    const {id, title, description, classes, onItemDelete} = props;
+    const {id, title, description, classes, onItemSelect, active} = props;
     return(
-        <Card className={classes.card}>
-            
-            <LinkedCardActionArea component={NextLink} hrefAs={`/p/${id}`} href={`/post?title=${title}`}>
+        <SelectableCard onCardSelect={onItemSelect} id={id} active={active}>
+            <>
                 <CardMedia
                     className={classes.media}
                     image="/static/images/cards/apple.jpg"
@@ -57,21 +52,14 @@ const PostLink = (props: IProps) => {
                         {description}
                     </Typography>
                 </CardContent>
-            </LinkedCardActionArea>
 
-            <CardActions>
-                <Button size="small" color="primary">
-                    Share
-                </Button>
-                {
-                    onItemDelete && 
-                    (<IconButton onClick={()=> onItemDelete(id)}>
-                        <Delete/>
-                    </IconButton>)
-                }
-            </CardActions>
-            
-        </Card>
+                <CardActions>
+                    <LinkedButton size="small" color="primary" component={NextLink} hrefAs={`/p/${id}`} href={`/post?title=${title}`}>
+                        Details
+                    </LinkedButton>
+                </CardActions>
+            </>
+        </SelectableCard>
         
     )
 }

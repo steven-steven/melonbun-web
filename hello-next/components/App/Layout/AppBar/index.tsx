@@ -12,7 +12,6 @@ import classNames from 'classnames';
 import {drawerWidth} from '../header_constants';
 import MuiLink from '@material-ui/core/Link';
 import {NextLink} from '../../../Shared/nextLink';
-import CreateItemPost from '../../../Shared/Dialogs/CreateItemPost';
 
 const styles = (theme:any)=> ({
     root: {
@@ -48,7 +47,6 @@ interface IProps {
     isLoggedIn: boolean;
     handleDrawerToggle: any; 
     isDrawerOpen: boolean;
-    onItemCreate: (newForm:any) => void;
     classes: {
         appBar: string;
         appBarShift: string;
@@ -58,7 +56,7 @@ interface IProps {
     }
 }
   
-const AppBarComponent = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen, onItemCreate}: IProps) => {
+const AppBarComponent = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}: IProps) => {
     return (
         <AppBar 
             position="fixed"
@@ -80,7 +78,6 @@ const AppBarComponent = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen,
                         MelonBun
                     </MuiLink>
                 </div>
-                <CreateItemPost onItemCreate={onItemCreate}/>
                 {!isLoggedIn && (<PopupMenu/>) }
             </Toolbar>
         </AppBar>
