@@ -28,39 +28,34 @@ interface IProps {
     onItemSelect: (ref:React.RefObject<HTMLButtonElement>) => void;
 }
 
-//attach prop:hrefAs to existing CardActionAreaProps
-interface IlinkedButtonProps extends ButtonProps{
-    hrefAs?:string
-}
-const LinkedButton: React.ReactType<IlinkedButtonProps> = Button;
-
 const PostLink = (props: IProps) => {
     const {id, title, description, classes, onItemSelect, active} = props;
     return(
-        <SelectableCard onCardSelect={onItemSelect} id={id} active={active}>
-            <>
-                <CardMedia
-                    className={classes.media}
-                    image="/static/images/cards/apple.jpg"
-                    title="Apple"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {title}
-                    </Typography>
-                    <Typography component="p">
-                        {description}
-                    </Typography>
-                </CardContent>
-
-                <CardActions>
-                    <LinkedButton size="small" color="primary" component={NextLink} hrefAs={`/p/${id}`} href={`/post?title=${title}`}>
-                        Details
-                    </LinkedButton>
-                </CardActions>
-            </>
-        </SelectableCard>
-        
+        <Card>
+            <SelectableCard onCardSelect={onItemSelect} id={id} active={active}>
+                <>
+                    <CardMedia
+                        className={classes.media}
+                        image="/static/images/cards/apple.jpg"
+                        title="Apple"
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {title}
+                        </Typography>
+                        <Typography component="p">
+                            {description}
+                        </Typography>
+                    </CardContent>
+                </>
+            </SelectableCard>
+            
+            <CardActions>
+                <Button size="small" color="primary" component={NextLink} href={`/post?title=${id}`}>
+                    Details
+                </Button>
+            </CardActions>
+        </Card>
     )
 }
 

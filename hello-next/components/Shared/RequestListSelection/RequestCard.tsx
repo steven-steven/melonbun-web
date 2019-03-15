@@ -6,11 +6,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardActionArea, {CardActionAreaProps} from '@material-ui/core/CardActionArea';
 import Divider from '@material-ui/core/Divider';
 import {IRequestInfo} from '../../../redux/dataTypes/request'
 import Icon from '@material-ui/core/Icon';
-
+import classNames from 'classnames';
+import SelectableCard from '../Selectable/selectableCard';
 
 const cardStyle = (theme:any)=> ({
     card: {
@@ -55,16 +55,25 @@ interface IProps extends IRequestInfo{
     isFavorite: boolean;
     onAddFavoriteRequest: (requestId:string) => void;
     onRemoveFavoriteRequest: (requestId:string) => void;
+    active: boolean;
+    onItemSelect: (ref:React.RefObject<HTMLButtonElement>) => void;
 }
-
-//attach prop:hrefAs to existing CardActionAreaProps
-interface linkedCardActionAreaProps extends CardActionAreaProps{
-    hrefAs?:string
-}
-const LinkedCardActionArea: React.ReactType<linkedCardActionAreaProps> = CardActionArea;
 
 const RequestCard = (props: IProps) => {
-    const {id, date, title, description, requesterUser, fulfilled, classes, isFavorite, onAddFavoriteRequest, onRemoveFavoriteRequest} = props;
+    const {
+        id, 
+        date, 
+        title, 
+        description, 
+        requesterUser, 
+        fulfilled, 
+        classes, 
+        isFavorite, 
+        onAddFavoriteRequest,
+        onRemoveFavoriteRequest, 
+        onItemSelect, 
+        active
+    } = props;
     
     const toggleFavorite = () =>{
         if(isFavorite){
@@ -83,8 +92,8 @@ const RequestCard = (props: IProps) => {
             />
             
                 
-            <div className={classes.details}>
-                <LinkedCardActionArea component={NextLink} hrefAs={`/p/${id}`} href={`/post?title=${title}`}>
+            <div className={classNames(classes.details,classes.flexGrow)}>
+                <SelectableCard onCardSelect={onItemSelect} id={id} active={active}>
                     <CardContent className={classes.flexGrow}>
                         <div className={classes.requestInfo}>
                             <Typography gutterBottom variant="caption" className={classes.flexGrow}>
@@ -101,7 +110,7 @@ const RequestCard = (props: IProps) => {
                             {description}
                         </Typography>
                     </CardContent>
-                </LinkedCardActionArea>
+                </SelectableCard>
                 <Divider variant="middle"/>
                 <div className={classes.controls}>
                     <Typography variant="subtitle2" component="p" className={classes.flexGrow}>

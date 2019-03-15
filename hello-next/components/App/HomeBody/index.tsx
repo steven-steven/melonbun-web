@@ -18,7 +18,12 @@ const HomeBody = (props: IProps) => {
     return (
         <>
             <Typography component="h3" variant="h3" gutterBottom>The Homepage</Typography>
-            <ItemListSelection itemsBuffer={itemsBuffer} onItemDelete={onItemDelete} onItemCreate={onItemCreate}/>
+            <ItemListSelection 
+                detailsHref={'/post?title='} 
+                itemsBuffer={itemsBuffer} 
+                onItemDelete={onItemDelete} 
+                onItemCreate={onItemCreate}
+            />
         </>
     )
 }

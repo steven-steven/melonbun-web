@@ -1,4 +1,4 @@
-import RequestList from '../../Shared/RequestList/index';
+import RequestListSelection from '../../Shared/RequestListSelection/index';
 
 import Typography from '@material-ui/core/Typography';
 import {IRequestInfo} from '../../../redux/dataTypes/request'
@@ -14,7 +14,12 @@ const RequestBody = (props: IProps) => {
     return (
         <>
             <Typography component="h3" variant="h3" gutterBottom>All Requests</Typography>
-            <RequestList {...other}/>
+            <RequestListSelection
+                detailsHref={'/post?title='} 
+                onItemDelete={()=>{}} 
+                onItemCreate={()=>{}} 
+                {...other}
+            />
         </>
             
     )

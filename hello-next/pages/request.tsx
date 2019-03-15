@@ -6,7 +6,7 @@ import RequestBody from '../components/App/RequestBody/index'
 import FavoritesBody from '../components/App/FavoritesBody/index'
 import {connect} from 'react-redux';
 import {IRequestInfo} from '../redux/dataTypes/request'
-import {onAddFavoriteRequest, onRemoveFavoriteRequest} from '../redux/actionCreators/profileActions';
+import {onAddFavoriteRequest, onRemoveFavoriteRequest} from '../redux/actioncreators/profileActions';
 
 interface IProps {
     requestBuffer:IRequestInfo[];
