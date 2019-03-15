@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import SideToolbar from '../../Shared/SideToolbar/index';
 import RootRef from '@material-ui/core/RootRef';
 import { Subtract } from 'utility-types';
+import { debounce } from 'lodash'
 
 export interface IInjectedSelectableProps{
     onItemSelect: (ref:React.RefObject<HTMLButtonElement>) => void; //pass the ref of the selected item
@@ -12,12 +13,14 @@ export interface IInjectedSelectableProps{
 
 interface IEnhancedSelectableProps{
     onItemDelete?: (id:any) => void;
+    detailsHref?: string;
     onItemCreate: (newItem:any) => void;
 }
 
 
 interface ISelectableState {
     selectedRef: React.RefObject<HTMLButtonElement> | any;
+    clickedOutside: boolean;
 }
 
 const SelectableContainerHOC = <P extends IInjectedSelectableProps>(MainBodyComponent: React.ComponentType<P>) => {
@@ -29,6 +32,7 @@ const SelectableContainerHOC = <P extends IInjectedSelectableProps>(MainBodyComp
             super(props);
             this.state = {
                 selectedRef: null,
+                clickedOutside: false
             };
         }
 
@@ -37,6 +41,12 @@ const SelectableContainerHOC = <P extends IInjectedSelectableProps>(MainBodyComp
         }
         componentWillUnmount(){
             window.removeEventListener('mousedown', this.handleClick, false);
+        }
+
+        clickOutside = ()=>{
+            this.setState({
+                clickedOutside: true
+            })
         }
         
         handleClick = (e) =>{
@@ -50,24 +60,34 @@ const SelectableContainerHOC = <P extends IInjectedSelectableProps>(MainBodyComp
             {
                 return;
             }
-        
+            
             //clicked outside target
+
             this.setState({
-                selectedRef: null
-            });
+                clickedOutside: true
+            })
         }
 
         componentDidUpdate({},prevState) {
-            const {selectedRef} = this.state;
+            
+            const {selectedRef, clickedOutside} = this.state;
+            const clickedCard = selectedRef && selectedRef.current;
 
-            if(selectedRef && selectedRef.current){
-                selectedRef.current.focus();
-                console.log(selectedRef.current.id);
-            }else if(prevState.selectedRef && prevState.selectedRef.current){
-                //target deleted
-                this.setState({
-                    selectedRef: null
-                });
+            
+            if(clickedOutside){
+                let newState:any = {clickedOutside:false}
+                if(prevState.selectedRef==selectedRef){
+                    newState = {...newState, selectedRef:null}; //clicked outside all card
+                }
+                this.setState(newState);
+            }else{
+                //clickedOutside always false if clicking in toolbar
+                if(prevState.selectedRef==selectedRef && prevState.selectedRef && !prevState.selectedRef.current){
+                    //prev target deleted
+                    this.setState({
+                        selectedRef: null
+                    });
+                }
             }
         };
 
@@ -78,17 +98,18 @@ const SelectableContainerHOC = <P extends IInjectedSelectableProps>(MainBodyComp
         }
         
         render(){
-            const {onItemDelete, onItemCreate, ...props} = this.props as IEnhancedSelectableProps;
+            const {onItemDelete, onItemCreate, detailsHref, ...props} = this.props as IEnhancedSelectableProps;
             const {selectedRef} = this.state;
+            
             return (
                 <Grid container direction="row" justify="flex-end"spacing={16}>
-                    <Grid item sm={12} md={2}>
+                    <Grid item xs={12} md={2}>
                         <RootRef rootRef={this.toolbarRef}>
-                            <SideToolbar selectedItemId={selectedRef?selectedRef.current.id:null} onItemDelete={onItemDelete} onItemCreate={onItemCreate}/>
+                            <SideToolbar detailsHref={detailsHref} selectedItemId={(selectedRef&&selectedRef.current)?selectedRef.current.id:null} onItemDelete={onItemDelete} onItemCreate={onItemCreate}/>
                         </RootRef>
                     </Grid>
                     <Grid item xs={12} md={10}>
-                        <MainBodyComponent onItemSelect={this.handleSelect} selectedItemId={selectedRef?selectedRef.current.id:null} {...props} />
+                        <MainBodyComponent onItemSelect={this.handleSelect} selectedItemId={(selectedRef&&selectedRef.current)?selectedRef.current.id:null} {...props} />
                     </Grid>
                 </Grid>
             )

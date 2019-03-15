@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import {drawerWidth} from './header_constants';
 import DrawerComponent from './Drawer/index';
 import {connect} from 'react-redux';
-import {onItemCreate} from '../../../redux/actionCreators/CardActions';
 
 const layoutStyle = (theme:any)=> ({
   root: {

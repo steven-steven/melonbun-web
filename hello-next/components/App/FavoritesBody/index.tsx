@@ -1,4 +1,4 @@
-import RequestList from '../../Shared/RequestList/index';
+import RequestListSelection from '../../Shared/RequestListSelection/index';
 
 import Typography from '@material-ui/core/Typography';
 import {IRequestInfo} from '../../../redux/dataTypes/request'
@@ -9,6 +9,7 @@ interface IProps {
     onAddFavoriteRequest: (requestId:string) => void;
     onRemoveFavoriteRequest: (requestId:string) => void;
 }
+
 const FavoriesBody = (props: IProps) => {
     const {requestBuffer, ...other} = props;
     const favoriteRequestBuffer = requestBuffer.filter(favoriteRequestId=>{
@@ -18,7 +19,14 @@ const FavoriesBody = (props: IProps) => {
     return (
         <>
             <Typography component="h3" variant="h3" gutterBottom>My Favorites</Typography>
-            <RequestList requestBuffer={favoriteRequestBuffer} {...other}/>
+            
+            <RequestListSelection 
+                detailsHref={'/post?title='} 
+                onItemDelete={()=>{}} 
+                onItemCreate={()=>{}} 
+                requestBuffer={favoriteRequestBuffer} 
+                {...other}
+            />
         </>
             
     )

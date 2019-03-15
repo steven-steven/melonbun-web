@@ -9,6 +9,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 
 const cardStyle = (theme:any)=> ({
@@ -126,9 +130,9 @@ class CreateItemPost extends React.Component<IProps, IState>{
     render(){
         return (
             <>
-                <Button variant="outlined" color="inherit" mini onClick={this.handleDialogToggle}>
-                    Create New Item
-                </Button>
+                <ListItem button onClick={this.handleDialogToggle}>
+                    <ListItemText primary="Create New Item" />
+                </ListItem>
                 {this.renderDialog()}
             </>
         );

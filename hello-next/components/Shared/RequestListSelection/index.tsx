@@ -1,24 +1,28 @@
 import RequestCard from './RequestCard';
 
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {IRequestInfo} from '../../../redux/dataTypes/request'
+import {IInjectedSelectableProps} from '../Selectable/selectableContainerHOC'
 
-interface IProps {
+import SelectableContainerHOC from '../../Shared/Selectable/selectableContainerHOC';
+
+interface IProps extends IInjectedSelectableProps {
     requestBuffer: IRequestInfo[]
     favoriteRequests: string[];
     onAddFavoriteRequest: (requestId:string) => void;
     onRemoveFavoriteRequest: (requestId:string) => void;
 }
 const RequestList = (props: IProps) => {
-    const {requestBuffer, onAddFavoriteRequest, onRemoveFavoriteRequest, favoriteRequests} = props;
+    const {requestBuffer, onAddFavoriteRequest, onRemoveFavoriteRequest, favoriteRequests, onItemSelect, selectedItemId} = props;
     return (
         <Grid container spacing={24}>
             {requestBuffer.map(request =>{
+                const selected = selectedItemId ? (request.id == selectedItemId) : false;
                 return ( 
                     <Grid key={request.id} item xs={12}>
-                        <Paper>
-                            <RequestCard 
+                            <RequestCard
+                                active={selected}
+                                onItemSelect={onItemSelect}
                                 date={request.date}
                                 requesterUser={request.requesterUser}
                                 fulfilled={request.fulfilled}
@@ -30,7 +34,6 @@ const RequestList = (props: IProps) => {
                                 onAddFavoriteRequest= {onAddFavoriteRequest}
                                 onRemoveFavoriteRequest= {onRemoveFavoriteRequest}
                             />
-                        </Paper>
                     </Grid>
                 );
             })}
@@ -38,4 +41,4 @@ const RequestList = (props: IProps) => {
     )
 }
 
-export default RequestList
+export default SelectableContainerHOC(RequestList)

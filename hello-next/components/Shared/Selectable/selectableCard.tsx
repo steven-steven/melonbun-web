@@ -3,8 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-
-
+import Button from '@material-ui/core/Button';
 
 interface IProps {
     onCardSelect: (ref:React.RefObject<HTMLButtonElement>) => void;
@@ -21,7 +20,7 @@ interface IState {
 
 const selectStyle = (theme:any)=> ({
     focusHighlight: {
-        backgroundColor: 'yellow',
+        backgroundColor: theme.palette.secondary.main,
     },
 });
 
@@ -37,13 +36,9 @@ class SelectableCard extends React.Component<IProps, IState> {
         const {onCardSelect, id, children, classes, active} = this.props;
 
         return (
-            <Card>
-            
-                <CardActionArea className={classNames(active && classes.focusHighlight)} id={id} buttonRef={this.cardRef} onClick={()=>{onCardSelect(this.cardRef)}}>
-                    {children}
-                </CardActionArea>
-            
-            </Card>
+            <CardActionArea className={classNames(active && classes.focusHighlight)} id={id} buttonRef={this.cardRef} onFocus={()=>{onCardSelect(this.cardRef)}}>
+                {children}
+            </CardActionArea>
         )
     }
 }

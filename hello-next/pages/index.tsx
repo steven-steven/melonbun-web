@@ -1,7 +1,7 @@
-import Layout from '../components/App/Layout/index'
-import HomeBody from '../components/App/HomeBody/index'
+import Layout from '../components/App/Layout/index';
+import HomeBody from '../components/App/HomeBody/index';
 import {connect} from 'react-redux';
-import {onItemDelete, onItemCreate} from '../redux/actionCreators/CardActions';
+import {onItemDelete, onItemCreate} from '../redux/actioncreators/cardActions';
 
 const index = (props) => {
   const {itemsBuffer,onItemDelete, onItemCreate} = props;
