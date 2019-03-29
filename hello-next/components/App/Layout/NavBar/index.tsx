@@ -56,7 +56,7 @@ interface IProps {
     }
 }
   
-const AppBarComponent = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}: IProps) => {
+export const NavBar = ({classes = defaultProps.classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}: IProps) => {
     return (
         <AppBar 
             position="fixed"
@@ -84,4 +84,14 @@ const AppBarComponent = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}
     )
 }
 
-export default withStyles(styles)(AppBarComponent)
+const defaultProps = {
+    classes: {
+        appBar: '',
+        appBarShift: '',
+        hide: '',
+        menuButton: '',
+        grow: '',
+    }
+};
+
+export default withStyles(styles)(NavBar);

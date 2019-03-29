@@ -53,7 +53,8 @@ const otherPages = [
     {'text':'Fullfill Requests', 'href':'/request'},
     {'text':'Settings', 'href':'#'},
 ]
-const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
+
+export const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes = defaultProps.classes } ) => {
 
     return(
         <>
@@ -94,6 +95,14 @@ const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
             </Drawer>
         </>
     );
+};
+
+const defaultProps = {
+    classes: {
+        drawerHeader: '',
+        drawerPaper: '',
+        drawer: '',
+    }
 };
 
 export default withStyles(drawerStyle)(DrawerPanel);

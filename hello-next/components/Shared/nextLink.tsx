@@ -15,4 +15,4 @@ export const NextLink: React.SFC<any> = ({ className, href, hrefAs, children}:IP
             </a>
         </Link>
     )
-}
+};

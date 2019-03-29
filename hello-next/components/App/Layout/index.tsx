@@ -1,4 +1,4 @@
-import AppBar from './AppBar/index'
+import NavBar from './NavBar/index'
 import Head from 'next/head';
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
@@ -80,7 +80,7 @@ class Layout extends React.Component<IProps, IState>{
               <title>My page title</title>
         </Head>
         <div className={classes.root}>
-          <AppBar 
+          <NavBar 
             handleDrawerToggle = {this.handleDrawerToggle}
             isDrawerOpen = {isDrawerOpen}
             isLoggedIn = {isLoggedIn}
