@@ -5,3 +5,9 @@ A social media platform that allows you to share your experiences, guides and re
 1. Go to project directory 'hello-next', run 'npm install'
 2. (development) run 'npm run dev'
 3. go to 'localhost:3000'
+
+## Storybook
+Storybook organizes the UI components used in the app in isolation (stories). Each story have documentation of each components, including their props, use cases, and can also perform unit/integration tests.
+1. Go to project directory 'hello-next'
+2. run 'npm run storybook'
+3. go to 'localhost:6006'
