@@ -7,12 +7,16 @@ import {IInjectedSelectableProps} from '../Selectable/selectableContainerHOC'
 import SelectableContainerHOC from '../../Shared/Selectable/selectableContainerHOC';
 
 interface IProps extends IInjectedSelectableProps {
+    /** array of IRequestInfo objects representing each request items */
     requestBuffer: IRequestInfo[]
+    /** string of request Id in favorites */
     favoriteRequests: string[];
+    /** callback called when user adds a favorite request */
     onAddFavoriteRequest: (requestId:string) => void;
+    /** callback called when user removes a favorite request */
     onRemoveFavoriteRequest: (requestId:string) => void;
 }
-const RequestList = (props: IProps) => {
+export const RequestList = (props: IProps) => {
     const {requestBuffer, onAddFavoriteRequest, onRemoveFavoriteRequest, favoriteRequests, onItemSelect, selectedItemId} = props;
     return (
         <Grid container spacing={24}>
@@ -41,4 +45,4 @@ const RequestList = (props: IProps) => {
     )
 }
 
-export default SelectableContainerHOC(RequestList)
+export default SelectableContainerHOC(RequestList);

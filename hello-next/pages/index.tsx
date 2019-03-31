@@ -1,3 +1,4 @@
+// pages/index.tsx
 import Layout from '../components/App/Layout/index';
 import HomeBody from '../components/App/HomeBody/index';
 import {connect} from 'react-redux';

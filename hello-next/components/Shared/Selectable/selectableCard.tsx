@@ -1,16 +1,17 @@
-import React from 'react';
-import Card from '@material-ui/core/Card';
+import React, {Component} from 'react';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import Button from '@material-ui/core/Button';
 
 interface IProps {
+    /** callback to pass selected card ref back when item selected */
     onCardSelect: (ref:React.RefObject<HTMLButtonElement>) => void;
-    id: string; //card info
+    /** id of card info */
+    id: string;
     classes:{
         focusHighlight: string;
     }
+    /** indicate if this card is selected */
     active: boolean;
 }
 
@@ -24,7 +25,7 @@ const selectStyle = (theme:any)=> ({
     },
 });
 
-class SelectableCard extends React.Component<IProps, IState> {
+export class SelectableCard extends Component<IProps, IState> {
     
     private cardRef = React.createRef<HTMLButtonElement>();
 
@@ -33,7 +34,7 @@ class SelectableCard extends React.Component<IProps, IState> {
     }
 
     render(){
-        const {onCardSelect, id, children, classes, active} = this.props;
+        const {onCardSelect, id, children, classes = defaultProps.classes, active} = this.props;
 
         return (
             <CardActionArea className={classNames(active && classes.focusHighlight)} id={id} buttonRef={this.cardRef} onFocus={()=>{onCardSelect(this.cardRef)}}>
@@ -43,4 +44,10 @@ class SelectableCard extends React.Component<IProps, IState> {
     }
 }
 
-export default withStyles(selectStyle)(SelectableCard)
+const defaultProps = {
+    classes:{
+        focusHighlight: ''
+    }
+};
+
+export default withStyles(selectStyle)(SelectableCard);

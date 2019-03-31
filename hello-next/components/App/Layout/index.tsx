@@ -1,7 +1,7 @@
-import AppBar from './AppBar/index'
+import NavBar from './NavBar/index'
 import Head from 'next/head';
 import { withStyles } from '@material-ui/core/styles';
-import React from 'react';
+import React, {Component} from 'react';
 import classNames from 'classnames';
 import {drawerWidth} from './header_constants';
 import DrawerComponent from './Drawer/index';
@@ -46,6 +46,7 @@ interface IProps {
     drawerHeader: string;
     contentSpacing: string;
   };
+  /** indicate id Layout's children contains tabLayout component. Used to adjust spacing accordingly */
   hasTabLayout: boolean;
 }
 interface IState {
@@ -53,9 +54,16 @@ interface IState {
   isLoggedIn: boolean;
 };
 
-class Layout extends React.Component<IProps, IState>{
+export class Layout extends Component<IProps, IState>{
   static defaultProps = {
-    hasTabLayout: false
+    hasTabLayout: false,
+    classes: {
+      root: '',
+      content: '',
+      contentShift: '',
+      drawerHeader: '',
+      contentSpacing: ''
+    }
   }
 
   constructor(props: IProps) {
@@ -80,7 +88,7 @@ class Layout extends React.Component<IProps, IState>{
               <title>My page title</title>
         </Head>
         <div className={classes.root}>
-          <AppBar 
+          <NavBar 
             handleDrawerToggle = {this.handleDrawerToggle}
             isDrawerOpen = {isDrawerOpen}
             isLoggedIn = {isLoggedIn}
@@ -112,4 +120,6 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = {
   
 }
-export default withStyles(layoutStyle)( connect(mapStateToProps, mapDispatchToProps)(Layout) );
+
+export const SLayout = withStyles(layoutStyle)(Layout)
+export default connect(mapStateToProps, mapDispatchToProps)(SLayout);

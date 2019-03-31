@@ -4,9 +4,13 @@ import Typography from '@material-ui/core/Typography';
 import {IRequestInfo} from '../../../redux/dataTypes/request'
 
 interface IProps {
+    /** array of IRequestInfo objects representing each request items */
     requestBuffer: IRequestInfo[]
+    /** string of request Id in favorites */
     favoriteRequests: string[];
+    /** callback called when user adds a favorite request */
     onAddFavoriteRequest: (requestId:string) => void;
+    /** callback called when user removes a favorite request */
     onRemoveFavoriteRequest: (requestId:string) => void;
 }
 

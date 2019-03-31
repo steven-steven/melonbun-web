@@ -3,7 +3,7 @@ export const onItemCreate = (newRequest) => ({
     type: 'CREATE_REQUEST'
 });
 
-export const onItemDelete = (id, contents) => ({
+export const onItemDelete = (id) => ({
     id,
     type: 'DELETE_REQUEST'
 });

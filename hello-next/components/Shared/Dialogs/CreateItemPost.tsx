@@ -1,7 +1,5 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {NextLink} from '../nextLink'
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -11,19 +9,18 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-
 
 const cardStyle = (theme:any)=> ({
     
 });
 
 interface IProps {
+    /** callback to create new Item. Pass form information */
     onItemCreate: (newForm:any) => void;
 }
 
 interface IState {
+    /** indicate if popup dialog is open */
     isDialogOpen: boolean;
     newItemPost: {
         title: string;
@@ -31,8 +28,8 @@ interface IState {
     }
 }
 
-class CreateItemPost extends React.Component<IProps, IState>{
-    
+export class CreateItemPost extends Component<IProps, IState>{
+
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -139,4 +136,4 @@ class CreateItemPost extends React.Component<IProps, IState>{
     }
 }
 
-export default withStyles(cardStyle)(CreateItemPost)
+export default withStyles(cardStyle)(CreateItemPost);

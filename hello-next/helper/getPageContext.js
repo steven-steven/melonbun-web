@@ -1,7 +1,7 @@
 import { SheetsRegistry } from 'jss';
 import { createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+export const theme = {
   palette: {
     //type: 'dark',
     primary: {
@@ -20,11 +20,11 @@ const theme = createMuiTheme({
       }
     }
   }
-});
+};
 
 function createPageContext() {
     return {
-        theme,
+        theme: createMuiTheme(theme),
         // This is needed in order to deduplicate the injection of CSS in the page.
         sheetsManager: new Map(),
         // This is needed in order to inject the critical CSS.

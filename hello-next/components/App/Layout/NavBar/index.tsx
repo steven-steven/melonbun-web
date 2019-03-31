@@ -3,7 +3,6 @@
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import PopupMenu from './PopupMenu';
@@ -44,8 +43,11 @@ const styles = (theme:any)=> ({
 });
 
 interface IProps {
+    /** the current user is logged in */
     isLoggedIn: boolean;
-    handleDrawerToggle: any; 
+    /** callback to open/close drawer */
+    handleDrawerToggle: any;
+    /** Drawer is open/close state */
     isDrawerOpen: boolean;
     classes: {
         appBar: string;
@@ -56,7 +58,7 @@ interface IProps {
     }
 }
   
-const AppBarComponent = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}: IProps) => {
+export const NavBar = ({classes = defaultProps.classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}: IProps) => {
     return (
         <AppBar 
             position="fixed"
@@ -84,4 +86,14 @@ const AppBarComponent = ({classes, isLoggedIn, handleDrawerToggle, isDrawerOpen}
     )
 }
 
-export default withStyles(styles)(AppBarComponent)
+const defaultProps = {
+    classes: {
+        appBar: '',
+        appBarShift: '',
+        hide: '',
+        menuButton: '',
+        grow: '',
+    }
+};
+
+export default withStyles(styles)(NavBar);

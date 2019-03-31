@@ -10,7 +10,6 @@ import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import Delete from '@material-ui/icons/Delete';
 import {drawerWidth} from '../header_constants';
 import {NextLink} from '../../../Shared/nextLink';
 import Icon from '@material-ui/core/Icon';
@@ -38,7 +37,9 @@ interface IProps {
         drawerPaper: string;
         drawer: string;
     };
+    /** if drawer is show/hide */
     show: boolean;
+    /** callback to open/close drawer */
     handleDrawerToggle: any;
 }
 
@@ -53,7 +54,8 @@ const otherPages = [
     {'text':'Fullfill Requests', 'href':'/request'},
     {'text':'Settings', 'href':'#'},
 ]
-const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
+
+export const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes = defaultProps.classes } ) => {
 
     return(
         <>
@@ -73,7 +75,7 @@ const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
                 </div>
                 <Divider />
                 <List>
-                    {myPages.map((linkItem, index) => (
+                    {myPages.map((linkItem) => (
                         <ListItem button key={linkItem.text} component={NextLink} href={linkItem.href}>
                             <ListItemIcon>
                                 <Icon>{linkItem.icon}</Icon>
@@ -84,7 +86,7 @@ const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
                 </List>
                 <Divider />
                 <List>
-                    {otherPages.map((linkItem, index) => (
+                    {otherPages.map((linkItem) => (
                         <ListItem button key={linkItem.text} component={NextLink} href={linkItem.href}>
                             <ListItemText primary={linkItem.text} />
                         </ListItem>
@@ -94,6 +96,14 @@ const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes } ) => {
             </Drawer>
         </>
     );
+};
+
+const defaultProps = {
+    classes: {
+        drawerHeader: '',
+        drawerPaper: '',
+        drawer: '',
+    }
 };
 
 export default withStyles(drawerStyle)(DrawerPanel);
