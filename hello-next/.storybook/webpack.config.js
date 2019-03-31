@@ -10,6 +10,7 @@ module.exports = ({ config, mode }) => {
     
     config.module.rules.push({
         test: /\.tsx?$/,
+        include: path.resolve(__dirname, '../'),
         use: [
             require.resolve('@storybook/addon-storysource/loader'),
             {
