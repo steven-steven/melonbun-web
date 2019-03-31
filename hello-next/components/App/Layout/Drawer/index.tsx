@@ -10,7 +10,6 @@ import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import Delete from '@material-ui/icons/Delete';
 import {drawerWidth} from '../header_constants';
 import {NextLink} from '../../../Shared/nextLink';
 import Icon from '@material-ui/core/Icon';
@@ -76,7 +75,7 @@ export const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes = 
                 </div>
                 <Divider />
                 <List>
-                    {myPages.map((linkItem, index) => (
+                    {myPages.map((linkItem) => (
                         <ListItem button key={linkItem.text} component={NextLink} href={linkItem.href}>
                             <ListItemIcon>
                                 <Icon>{linkItem.icon}</Icon>
@@ -87,7 +86,7 @@ export const DrawerPanel: SFC<IProps> = ( { show, handleDrawerToggle, classes = 
                 </List>
                 <Divider />
                 <List>
-                    {otherPages.map((linkItem, index) => (
+                    {otherPages.map((linkItem) => (
                         <ListItem button key={linkItem.text} component={NextLink} href={linkItem.href}>
                             <ListItemText primary={linkItem.text} />
                         </ListItem>

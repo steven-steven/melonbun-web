@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import SideToolbar from '../../Shared/SideToolbar/index';
 import RootRef from '@material-ui/core/RootRef';
 import { Subtract } from 'utility-types';
-import { debounce } from 'lodash'
 
 export interface IInjectedSelectableProps{
     onItemSelect: (ref:React.RefObject<HTMLButtonElement>) => void; //pass the ref of the selected item
@@ -64,7 +62,6 @@ export const SelectableContainerHOC = <P extends IInjectedSelectableProps>(MainB
             }
             
             //clicked outside target
-
             this.setState({
                 clickedOutside: true
             })
@@ -73,8 +70,6 @@ export const SelectableContainerHOC = <P extends IInjectedSelectableProps>(MainB
         componentDidUpdate({},prevState) {
             
             const {selectedRef, clickedOutside} = this.state;
-            const clickedCard = selectedRef && selectedRef.current;
-
             
             if(clickedOutside){
                 let newState:any = {clickedOutside:false}

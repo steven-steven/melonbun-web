@@ -1,13 +1,11 @@
 import { withStyles } from '@material-ui/core/styles';
 import {NextLink} from '../nextLink'
-
-import IconButton from '@material-ui/core/IconButton';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button, {ButtonProps} from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 import {IItemInfo} from '../../../redux/dataTypes/item'
 import SelectableCard from '../Selectable/selectableCard';
 

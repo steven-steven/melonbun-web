@@ -1,6 +1,4 @@
 import { withStyles } from '@material-ui/core/styles';
-import {NextLink} from '../nextLink'
-
 import IconButton from '@material-ui/core/IconButton';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';

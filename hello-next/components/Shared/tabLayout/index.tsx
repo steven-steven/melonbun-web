@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -53,7 +52,7 @@ export class TabLayout extends Component<ITabLayoutProps, IState>{
             <div className={classes.root}>
                 <AppBar position="static">
                     <Tabs value={tabValue} onChange={this.handleChange} centered>
-                        {tabContentList.map((tabItem, index) => {
+                        {tabContentList.map((tabItem) => {
                             const icon = tabItem.icon? <Icon>{tabItem.icon}</Icon> : '';
                             return( <Tab icon={icon} label={`${tabItem.title}`} /> )
                         })}

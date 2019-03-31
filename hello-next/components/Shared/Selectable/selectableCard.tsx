@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import Button from '@material-ui/core/Button';
 
 interface IProps {
     /** callback to pass selected card ref back when item selected */

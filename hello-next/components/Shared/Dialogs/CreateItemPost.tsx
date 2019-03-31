@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {NextLink} from '../nextLink'
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -11,9 +9,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-
 
 const cardStyle = (theme:any)=> ({
     

@@ -1,5 +1,4 @@
-// pages/request.js
-import {SFC} from 'react'
+// pages/request.tsx
 import Layout from '../components/App/Layout/index'
 import TabLayout, {ITabContent} from '../components/Shared/tabLayout/index'
 import RequestBody from '../components/App/RequestBody/index'
