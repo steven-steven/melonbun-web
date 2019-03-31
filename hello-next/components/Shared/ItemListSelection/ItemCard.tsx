@@ -18,18 +18,24 @@ const cardStyle = (theme:any)=> ({
 });
 
 interface IProps {
+    /** Indicate if ItemCard is selected */
     active: boolean;
+    /** Unique id of item shown */
     id: IItemInfo["id"];
+    /** Title of Item */
     title: IItemInfo["title"];
+    /** Description of Item */
     description: IItemInfo["description"];
+    /** Injected from MUI withStyle */
     classes: {
         media: string;
     }
+    /** Callback that passes the SelectableCard ref back to selectableContainerHOC */
     onItemSelect: (ref:React.RefObject<HTMLButtonElement>) => void;
 }
 
-const PostLink = (props: IProps) => {
-    const {id, title, description, classes, onItemSelect, active} = props;
+export const ItemCard = (props: IProps) => {
+    const {id, title, description, classes = defaultProps.classes, onItemSelect, active} = props;
     return(
         <Card>
             <SelectableCard onCardSelect={onItemSelect} id={id} active={active}>
@@ -59,4 +65,10 @@ const PostLink = (props: IProps) => {
     )
 }
 
-export default withStyles(cardStyle)(PostLink)
+const defaultProps = {
+    classes: {
+        media: ''
+    }
+};
+
+export default withStyles(cardStyle)(ItemCard);

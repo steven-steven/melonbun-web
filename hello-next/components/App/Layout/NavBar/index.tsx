@@ -44,8 +44,11 @@ const styles = (theme:any)=> ({
 });
 
 interface IProps {
+    /** the current user is logged in */
     isLoggedIn: boolean;
-    handleDrawerToggle: any; 
+    /** callback to open/close drawer */
+    handleDrawerToggle: any;
+    /** Drawer is open/close state */
     isDrawerOpen: boolean;
     classes: {
         appBar: string;

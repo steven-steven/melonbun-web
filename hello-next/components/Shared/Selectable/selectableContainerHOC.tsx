@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import SideToolbar from '../../Shared/SideToolbar/index';
@@ -12,20 +12,22 @@ export interface IInjectedSelectableProps{
 }
 
 interface IEnhancedSelectableProps{
+    /** callback called when user delete an item */
     onItemDelete?: (id:any) => void;
+    /** base link of card's details page. ie) '/post?title=' and an id will be appended */
     detailsHref?: string;
+    /** callback called when user creates a new item */
     onItemCreate: (newItem:any) => void;
 }
-
 
 interface ISelectableState {
     selectedRef: React.RefObject<HTMLButtonElement> | any;
     clickedOutside: boolean;
 }
 
-const SelectableContainerHOC = <P extends IInjectedSelectableProps>(MainBodyComponent: React.ComponentType<P>) => {
+export const SelectableContainerHOC = <P extends IInjectedSelectableProps>(MainBodyComponent: React.ComponentType<P>) => {
 
-    class SelectableContainer extends React.Component<Subtract<P, IInjectedSelectableProps> & IEnhancedSelectableProps, ISelectableState> {
+    class SelectableContainer extends Component<Subtract<P, IInjectedSelectableProps> & IEnhancedSelectableProps, ISelectableState> {
         
         private toolbarRef = React.createRef<HTMLElement>();
         constructor(props) {

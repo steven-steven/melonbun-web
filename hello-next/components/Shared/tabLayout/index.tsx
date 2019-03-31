@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -25,6 +25,7 @@ export interface ITabLayoutProps {
     classes: {
         root: string;   
     };
+    /** array of ITabContent, object containing data for each tab */
     tabContentList: ITabContent[];
 }
 
@@ -32,7 +33,7 @@ interface IState {
     tabValue: number;
 }
 
-class TabLayout extends React.Component<ITabLayoutProps, IState>{
+export class TabLayout extends Component<ITabLayoutProps, IState>{
     
     constructor(props: ITabLayoutProps) {
         super(props);
@@ -47,7 +48,7 @@ class TabLayout extends React.Component<ITabLayoutProps, IState>{
 
     render(){
         const {tabValue} = this.state;
-        const {tabContentList, classes} = this.props;
+        const {tabContentList, classes = defaultProps.classes} = this.props;
         return (
             <div className={classes.root}>
                 <AppBar position="static">
@@ -64,4 +65,10 @@ class TabLayout extends React.Component<ITabLayoutProps, IState>{
     }
 }
 
-export default withStyles(TabLayoutStyle)(TabLayout)
+const defaultProps = {
+    classes:{
+        root: ''
+    }
+};
+
+export default withStyles(TabLayoutStyle)(TabLayout);

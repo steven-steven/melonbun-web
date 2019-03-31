@@ -4,12 +4,15 @@ import {IItemInfo} from '../../../redux/dataTypes/item'
 import SelectableContainerHOC from '../../Shared/Selectable/selectableContainerHOC';
 
 interface IProps {
+    /** array of IItemInfo objects representing each item infos */
     itemsBuffer: IItemInfo[];
+    /** Callback that passes the SelectableCard ref back to selectableContainerHOC */
     onItemSelect: (ref:React.RefObject<HTMLButtonElement>) => void;
+    /** Id of currently selected card */
     selectedItemId: string;
 }
 
-const ItemList = (props: IProps) => {
+export const ItemList = (props: IProps) => {
     const {itemsBuffer, onItemSelect, selectedItemId} = props;
     return (
         <Grid container direction="row" justify="flex-start" spacing={16} alignItems="flex-start">
@@ -32,4 +35,4 @@ const ItemList = (props: IProps) => {
     )
 }
 
-export default SelectableContainerHOC(ItemList)
+export default SelectableContainerHOC(ItemList);

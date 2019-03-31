@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popper from '@material-ui/core/Popper';
@@ -15,7 +15,7 @@ interface IState {
     isMenuOpen: boolean
 }
 
-class PopupMenu extends React.Component<IProps, IState>{
+class PopupMenu extends Component<IProps, IState>{
     private anchorEl: HTMLElement|null;
     private setAnchorElRef: (element:any) => void;
     constructor(props: IProps) {

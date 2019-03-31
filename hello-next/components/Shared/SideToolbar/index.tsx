@@ -18,17 +18,21 @@ const toolbarStyle = (theme:any)=> ({
 });
 
 interface IProps {
+    /** Id of currently selected card */
     selectedItemId?: string;
+    /** base link of card's details page. ie) '/post?title=' and an id will be appended */
     detailsHref?: string;
+    /** callback called when user delete an item */
     onItemDelete?: (id:any) => void;
+    /** callback called when user creates a new item */
     onItemCreate: (newItem:any) => void;
     classes:{
         root: string;
     }
 }
 
-const SideToolbar = (props: IProps) => {
-    const {onItemDelete, selectedItemId, onItemCreate, classes, detailsHref} = props;
+export const SideToolbar = (props: IProps) => {
+    const {onItemDelete, selectedItemId, onItemCreate, classes = defaultProps.classes , detailsHref} = props;
 
     const itemSpecificMenus = ()=>{
         return (
@@ -78,4 +82,10 @@ const SideToolbar = (props: IProps) => {
     )
 }
 
-export default withStyles(toolbarStyle)(SideToolbar)
+const defaultProps = {
+    classes:{
+        root: ''
+    }
+};
+
+export default withStyles(toolbarStyle)(SideToolbar);

@@ -38,7 +38,9 @@ interface IProps {
         drawerPaper: string;
         drawer: string;
     };
+    /** if drawer is show/hide */
     show: boolean;
+    /** callback to open/close drawer */
     handleDrawerToggle: any;
 }
 

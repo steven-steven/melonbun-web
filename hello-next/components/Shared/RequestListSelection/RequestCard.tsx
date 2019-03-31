@@ -51,15 +51,19 @@ interface IProps extends IRequestInfo{
         flexGrow: string;
         requestInfo: string;
     }
-    likedRequests?: boolean;
+    /** indicate if this request is in user's favorites */
     isFavorite: boolean;
+    /** callback called when user adds a favorite request */
     onAddFavoriteRequest: (requestId:string) => void;
+    /** callback called when user removes a favorite request */
     onRemoveFavoriteRequest: (requestId:string) => void;
+    /** indicate if this card is selected */
     active: boolean;
+    /** callback to pass selected card ref back when item selected */
     onItemSelect: (ref:React.RefObject<HTMLButtonElement>) => void;
 }
 
-const RequestCard = (props: IProps) => {
+export const RequestCard = (props: IProps) => {
     const {
         id, 
         date, 
@@ -67,7 +71,7 @@ const RequestCard = (props: IProps) => {
         description, 
         requesterUser, 
         fulfilled, 
-        classes, 
+        classes = defaultProps.classes, 
         isFavorite, 
         onAddFavoriteRequest,
         onRemoveFavoriteRequest, 
@@ -134,4 +138,15 @@ const RequestCard = (props: IProps) => {
     )
 }
 
-export default withStyles(cardStyle)(RequestCard)
+const defaultProps = {
+    classes: {
+        details: '',
+        controls: '',
+        image: '',
+        card:'',
+        flexGrow: '',
+        requestInfo: ''
+    }
+};
+
+export default withStyles(cardStyle)(RequestCard);

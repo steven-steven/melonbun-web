@@ -1,43 +1,56 @@
 import React from 'react';
 
 import { storiesOf, addDecorator } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
-import {muiTheme} from 'storybook-addon-material-ui';
-import { Button, Welcome } from '@storybook/react/demo';
+
 import SDrawerPanel, {DrawerPanel} from '../components/App/Layout/Drawer/index';
 import SNavBar, {NavBar} from '../components/App/Layout/NavBar/index.tsx'
-import {theme} from '../helper/getPageContext';
-import { withInfo } from '@storybook/addon-info';
+import {SLayout, Layout} from '../components/App/Layout/index';
+import PopupMenu from '../components/App/Layout/NavBar/PopupMenu';
 
-addDecorator(withInfo);
-addDecorator(muiTheme([theme]))
+storiesOf('Layout', module)
+    .add('Layout', () => (
+            <SLayout>
+                Some Content
+            </SLayout>
+        ),
+        { info: {
+            text: 'Layout wrapper for all pages',
+            propTables: [Layout],
+            propTablesExclude: [SLayout], // do not display propTable for HOC
+        }}
+    );
 
 storiesOf('Layout/NavBar', module)
     .addParameters({
         info: {
-            text: 'NavBar and Drawer component that wraps every page',
-            propTables: [NavBar, DrawerPanel],
-            propTablesExclude: [SNavBar, SDrawerPanel], // do not display propTable for HOC
+            text: 'Main navigation bar component',
+            propTables: [NavBar],
+            propTablesExclude: [SNavBar], // do not display propTable for HOC
         },
     })
-    .add('NavBar_Close', () => (
+    .add('NavBar', () => (
         <SNavBar
             handleDrawerToggle = {linkTo('Layout/NavBar', 'NavBar_Open')}
             isDrawerOpen = {false}
             isLoggedIn = {false}
         />
     ))
-    .add('NavBar_Open', () => (
-        <div>
-            <SNavBar
-                handleDrawerToggle = {()=>{}}
-                isDrawerOpen = {true}
-                isLoggedIn = {false}
-            />
-            <SDrawerPanel
-                show = {true}
-                handleDrawerToggle = {linkTo('Layout/NavBar', 'NavBar_Close')}
-            />
-        </div>
+    .add('NavBar/PopupMenu', () => (
+        <PopupMenu/>
+    ));
+
+storiesOf('Layout/Drawer', module)
+    .addParameters({
+        info: {
+            text: 'Left Drawer Component',
+            propTables: [DrawerPanel],
+            propTablesExclude: [SDrawerPanel], // do not display propTable for HOC
+        },
+    })
+    .add('Drawer', () => (
+        <SDrawerPanel
+            show = {true}
+            handleDrawerToggle = {linkTo('Layout/NavBar', 'NavBar_Close')}
+        />
     ));

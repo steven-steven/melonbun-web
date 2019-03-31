@@ -8,8 +8,11 @@ import SideToolbar from '../../Shared/SideToolbar/index';
 import Paper from '@material-ui/core/Paper';
 
 interface IProps {
+    /** array of IItemInfo objects representing each item infos */
     itemsBuffer: IItemInfo[];
+    /** callback called when user delete an item */
     onItemDelete: (id:any) => void;
+    /** callback called when user creates a new item */
     onItemCreate: (newItem:any) => void;
 }
 

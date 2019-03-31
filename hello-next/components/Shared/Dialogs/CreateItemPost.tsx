@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import {NextLink} from '../nextLink'
 
@@ -20,10 +20,12 @@ const cardStyle = (theme:any)=> ({
 });
 
 interface IProps {
+    /** callback to create new Item. Pass form information */
     onItemCreate: (newForm:any) => void;
 }
 
 interface IState {
+    /** indicate if popup dialog is open */
     isDialogOpen: boolean;
     newItemPost: {
         title: string;
@@ -31,8 +33,8 @@ interface IState {
     }
 }
 
-class CreateItemPost extends React.Component<IProps, IState>{
-    
+export class CreateItemPost extends Component<IProps, IState>{
+
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -139,4 +141,4 @@ class CreateItemPost extends React.Component<IProps, IState>{
     }
 }
 
-export default withStyles(cardStyle)(CreateItemPost)
+export default withStyles(cardStyle)(CreateItemPost);
