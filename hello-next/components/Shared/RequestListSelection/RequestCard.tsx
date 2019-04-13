@@ -40,7 +40,8 @@ const cardStyle = (theme:any)=> ({
     }
 });
 
-interface IProps extends IRequestInfo{
+interface IProps{
+    request: IRequestInfo
     classes: {
         details: string;
         controls: string;
@@ -63,18 +64,13 @@ interface IProps extends IRequestInfo{
 
 export const RequestCard = (props: IProps) => {
     const {
-        id, 
-        date, 
-        title, 
-        description, 
-        requesterUser, 
-        fulfilled, 
         classes = defaultProps.classes, 
         isFavorite, 
         onAddFavoriteRequest,
         onRemoveFavoriteRequest, 
         onItemSelect, 
-        active
+        active,
+        request:{id, name, description, created_at, created_by, status, price, tags}
     } = props;
     
     const toggleFavorite = () =>{
@@ -99,14 +95,14 @@ export const RequestCard = (props: IProps) => {
                     <CardContent className={classes.flexGrow}>
                         <div className={classes.requestInfo}>
                             <Typography gutterBottom variant="caption" className={classes.flexGrow}>
-                                Requested By: {requesterUser}
+                                Requested By: {created_by}
                             </Typography>
                             <Typography gutterBottom variant="caption">
-                                {date}
+                                {created_at}
                             </Typography>
                         </div>
                         <Typography variant="h4">
-                            {title}
+                            {name}
                         </Typography>
                         <Typography variant="body1" component="p">
                             {description}
@@ -125,7 +121,7 @@ export const RequestCard = (props: IProps) => {
                         </IconButton>
                     </Typography>
                     <Typography variant="subtitle2" component="p">
-                        {fulfilled?'fulfilled':'pending'}
+                        {status}
                     </Typography>
                 </div>
             </div>

@@ -22,17 +22,12 @@ export const RequestList = (props: IProps) => {
         <Grid container spacing={24}>
             {requestBuffer.map(request =>{
                 const selected = selectedItemId ? (request.id == selectedItemId) : false;
-                return ( 
+                return (
                     <Grid key={request.id} item xs={12}>
                             <RequestCard
                                 active={selected}
                                 onItemSelect={onItemSelect}
-                                date={request.date}
-                                requesterUser={request.requesterUser}
-                                fulfilled={request.fulfilled}
-                                id={request.id} 
-                                title={request.title} 
-                                description={request.description}
+                                request={request}
                                 isFavorite={favoriteRequests.includes(request.id)}
 
                                 onAddFavoriteRequest= {onAddFavoriteRequest}

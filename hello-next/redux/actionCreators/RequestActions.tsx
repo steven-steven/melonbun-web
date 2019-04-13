@@ -1,9 +1,37 @@
-export const onItemCreate = (newRequest) => ({
-    newRequest,
-    type: 'CREATE_REQUEST'
+import * as RequestServices from '../services/requestServices';
+import {IRequestForm} from '../dataTypes/request';
+
+export const setRequestEntries = (requestList:any) => ({
+    payload: {requestList},
+    type: 'INITIALIZE_ALL_REQUESTS'
 });
 
-export const onItemDelete = (id) => ({
-    id,
-    type: 'DELETE_REQUEST'
-});
+export function initializeRequestEntries() {
+
+    return function (dispatch, getState) {
+
+        return RequestServices.getAllRequests().then(
+            data => {
+                dispatch(setRequestEntries(data))
+            }
+        )
+        .catch(function(error) {
+            console.log("Error: Failed to initialize requests - ", error);
+        });
+    };
+}
+
+export function createNewRequest(requestForm:IRequestForm) {
+
+    return function (dispatch, getState) {
+
+        return RequestServices.createNewRequest(requestForm).then(
+            data => {
+                if(data) dispatch(initializeRequestEntries())
+            }
+        )
+        .catch(function(error) {
+            console.log("Error: Failed to create request - ", error);
+        });
+    };
+}
