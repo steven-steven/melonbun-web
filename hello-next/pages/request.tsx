@@ -1,4 +1,5 @@
 // pages/request.tsx
+import React, {Component} from 'react';
 import Layout from '../components/App/Layout/index'
 import TabLayout, {ITabContent} from '../components/Shared/tabLayout/index'
 import RequestBody from '../components/App/RequestBody/index'
@@ -6,39 +7,52 @@ import FavoritesBody from '../components/App/FavoritesBody/index'
 import {connect} from 'react-redux';
 import {IRequestInfo} from '../redux/dataTypes/request'
 import {onAddFavoriteRequest, onRemoveFavoriteRequest} from '../redux/actioncreators/profileActions';
+import {initializeRequestEntries, createNewRequest} from '../redux/actioncreators/RequestActions';
+
 
 interface IProps {
     requestBuffer:IRequestInfo[];
     favoriteRequests: string[];
     onAddFavoriteRequest: (requestId:string) => void;
     onRemoveFavoriteRequest: (requestId:string) => void;
+    initializeRequestEntries: typeof initializeRequestEntries;
+    createNewRequest: typeof createNewRequest;
 }
 
-const Request = (props:IProps) => {
-    const { requestBuffer, favoriteRequests, onAddFavoriteRequest, onRemoveFavoriteRequest } = props;
+export class Request extends Component<IProps>{
 
-    const RequestPage = <RequestBody 
-        requestBuffer={requestBuffer} 
-        favoriteRequests={favoriteRequests}
-        onAddFavoriteRequest={onAddFavoriteRequest}
-        onRemoveFavoriteRequest={onRemoveFavoriteRequest}
-    />
-    const FavoritesPage = <FavoritesBody
-        requestBuffer={requestBuffer} 
-        favoriteRequests={favoriteRequests}
-        onAddFavoriteRequest={onAddFavoriteRequest}
-        onRemoveFavoriteRequest={onRemoveFavoriteRequest}
-    />
-    const tabContentList:ITabContent[] = [
-        {title:'Requests', content:RequestPage, icon:'assignment'},
-        {title:'Favorites', content:FavoritesPage, icon:'favorite'}
-    ]
+    componentWillMount() {
+        const {initializeRequestEntries} = this.props;
+        initializeRequestEntries();
+    }
 
-    return (
-        <Layout hasTabLayout={true}>
-            <TabLayout tabContentList={tabContentList}/>
-        </Layout>
-    )
+    render(){
+        const { requestBuffer, favoriteRequests, onAddFavoriteRequest, onRemoveFavoriteRequest, createNewRequest} = this.props;
+
+        const RequestPage = <RequestBody 
+            requestBuffer={requestBuffer} 
+            favoriteRequests={favoriteRequests}
+            onAddFavoriteRequest={onAddFavoriteRequest}
+            onRemoveFavoriteRequest={onRemoveFavoriteRequest}
+            onItemCreate={createNewRequest}
+        />
+        const FavoritesPage = <FavoritesBody
+            requestBuffer={requestBuffer} 
+            favoriteRequests={favoriteRequests}
+            onAddFavoriteRequest={onAddFavoriteRequest}
+            onRemoveFavoriteRequest={onRemoveFavoriteRequest}
+        />
+        const tabContentList:ITabContent[] = [
+            {title:'Requests', content:RequestPage, icon:'assignment'},
+            {title:'Favorites', content:FavoritesPage, icon:'favorite'}
+        ]
+
+        return (
+            <Layout hasTabLayout={true}>
+                <TabLayout tabContentList={tabContentList}/>
+            </Layout>
+        )
+    }
 }
 
 const mapStateToProps = (state)=>{
@@ -49,6 +63,8 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps = {
     onAddFavoriteRequest,
-    onRemoveFavoriteRequest
+    onRemoveFavoriteRequest,
+    initializeRequestEntries,
+    createNewRequest
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Request);

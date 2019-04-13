@@ -12,6 +12,10 @@ interface IProps {
     onAddFavoriteRequest: (requestId:string) => void;
     /** callback called when user removes a favorite request */
     onRemoveFavoriteRequest: (requestId:string) => void;
+    /** callback called when user delete a request */
+    onItemDelete?: (id:any) => void;
+    /** callback called when user creates a request */
+    onItemCreate: (newItem:any) => void;
 }
 const RequestBody = (props: IProps) => {
     const {...other} = props;
@@ -21,7 +25,6 @@ const RequestBody = (props: IProps) => {
             <RequestListSelection
                 detailsHref={'/post?title='} 
                 onItemDelete={()=>{}} 
-                onItemCreate={()=>{}} 
                 {...other}
             />
         </>
