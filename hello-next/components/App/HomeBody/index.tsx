@@ -1,7 +1,8 @@
 import React from 'react';
-import ItemListSelection from '../../Shared/ItemListSelection/index';
+import ItemListSelection from '../../Shared/ItemListSelection';
 import Typography from '@material-ui/core/Typography';
 import {IItemInfo} from '../../../redux/dataTypes/item';
+import {FormType} from '../../Shared/Forms/FormRenderHelper';
 
 interface IProps {
     /** array of IItemInfo objects representing each item infos */
@@ -18,8 +19,9 @@ const HomeBody = (props: IProps) => {
         <>
             <Typography component="h3" variant="h3" gutterBottom>The Homepage</Typography>
             <ItemListSelection 
-                detailsHref={'/post?title='} 
-                itemsBuffer={itemsBuffer} 
+                detailsHref={'/post?title='}
+                formType={FormType.ITEM} 
+                itemsBuffer={itemsBuffer}
                 onItemDelete={onItemDelete} 
                 onItemCreate={onItemCreate}
             />

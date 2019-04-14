@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 
-import STabLayout, {TabLayout} from '../components/Shared/tabLayout/index';
+import STabLayout, {TabLayout} from '../components/Shared/tabLayout';
 import TabContainer from '../components/Shared/tabLayout/TabContainer';
 
 storiesOf('TabLayout', module)

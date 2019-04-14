@@ -1,9 +1,9 @@
 // pages/request.tsx
 import React, {Component} from 'react';
-import Layout from '../components/App/Layout/index'
-import TabLayout, {ITabContent} from '../components/Shared/tabLayout/index'
-import RequestBody from '../components/App/RequestBody/index'
-import FavoritesBody from '../components/App/FavoritesBody/index'
+import Layout from '../components/App/Layout'
+import TabLayout, {ITabContent} from '../components/Shared/tabLayout'
+import RequestBody from '../components/App/RequestBody'
+import FavoritesBody from '../components/App/FavoritesBody'
 import {connect} from 'react-redux';
 import {IRequestInfo} from '../redux/dataTypes/request'
 import {onAddFavoriteRequest, onRemoveFavoriteRequest} from '../redux/actioncreators/profileActions';
@@ -41,6 +41,7 @@ export class Request extends Component<IProps>{
             favoriteRequests={favoriteRequests}
             onAddFavoriteRequest={onAddFavoriteRequest}
             onRemoveFavoriteRequest={onRemoveFavoriteRequest}
+            onItemCreate={createNewRequest}
         />
         const tabContentList:ITabContent[] = [
             {title:'Requests', content:RequestPage, icon:'assignment'},

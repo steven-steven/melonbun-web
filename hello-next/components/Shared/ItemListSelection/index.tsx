@@ -1,7 +1,7 @@
 import ItemCard from './ItemCard';
 import Grid from '@material-ui/core/Grid';
 import {IItemInfo} from '../../../redux/dataTypes/item'
-import SelectableContainerHOC from '../../Shared/Selectable/selectableContainerHOC';
+import SelectableContainerHOC from '../Selectable/selectableContainerHOC';
 
 interface IProps {
     /** array of IItemInfo objects representing each item infos */

@@ -5,7 +5,7 @@ import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
 
 import Grid from '@material-ui/core/Grid';
-import SSideToolbar, {SideToolbar} from '../components/Shared/SideToolbar/index';
+import SSideToolbar, {SideToolbar} from '../components/Shared/SideToolbar';
 
 storiesOf('SideToolBar', module)
     .addParameters({

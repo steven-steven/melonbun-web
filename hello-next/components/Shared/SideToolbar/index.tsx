@@ -7,7 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
-import CreateItemPost from '../Dialogs/CreateItemPost';
+import PopupDialog from '../Dialogs/PopupDialog';
 import {NextLink} from '../nextLink';
 
 const toolbarStyle = (theme:any)=> ({
@@ -25,13 +25,15 @@ interface IProps {
     onItemDelete?: (id:any) => void;
     /** callback called when user creates a new item */
     onItemCreate: (newItem:any) => void;
+    /** FormType constant from 'FormRenderHelper.tsx' that identifies type of form to be rendered */
+    formType: string;
     classes:{
         root: string;
     }
 }
 
 export const SideToolbar = (props: IProps) => {
-    const {onItemDelete, selectedItemId, onItemCreate, classes = defaultProps.classes , detailsHref} = props;
+    const {onItemDelete, selectedItemId, onItemCreate, classes = defaultProps.classes , detailsHref, formType} = props;
 
     const itemSpecificMenus = ()=>{
         return (
@@ -64,7 +66,10 @@ export const SideToolbar = (props: IProps) => {
         <Paper className={classes.root}>
             
             <List component="nav">
-                <CreateItemPost onItemCreate={onItemCreate}/>
+                <PopupDialog 
+                    onSubmit={onItemCreate}
+                    formType={formType}
+                />
                 <ListItem button>
                     <ListItemText primary="Share" />
                 </ListItem>

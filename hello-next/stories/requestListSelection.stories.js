@@ -4,7 +4,7 @@ import { storiesOf, addDecorator } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
 
-import RequestListSelection from '../components/Shared/RequestListSelection/index';
+import RequestListSelection from '../components/Shared/RequestListSelection';
 import SRequestCard, {RequestCard} from '../components/Shared/RequestListSelection/RequestCard.tsx';
 
 const requestBuffer=[
