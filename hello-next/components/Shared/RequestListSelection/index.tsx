@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import {IRequestInfo} from '../../../redux/dataTypes/request'
 import {IInjectedSelectableProps} from '../Selectable/selectableContainerHOC'
 
-import SelectableContainerHOC from '../../Shared/Selectable/selectableContainerHOC';
+import SelectableContainerHOC from '../Selectable/selectableContainerHOC';
 
 interface IProps extends IInjectedSelectableProps {
     /** array of IRequestInfo objects representing each request items */

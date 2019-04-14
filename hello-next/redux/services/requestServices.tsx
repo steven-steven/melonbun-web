@@ -7,6 +7,6 @@ export function getAllRequests(){
 
 export function createNewRequest(requestForm:IRequestForm){
     //filter parameter before sending to api as string
-    const body = JSON.stringify(requestForm);
-    return RequestApi.create(body);
+    //const data = JSON.stringify(requestForm);
+    return RequestApi.create({data:requestForm});
 }

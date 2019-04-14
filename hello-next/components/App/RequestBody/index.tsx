@@ -1,7 +1,8 @@
-import RequestListSelection from '../../Shared/RequestListSelection/index';
+import RequestListSelection from '../../Shared/RequestListSelection';
 
 import Typography from '@material-ui/core/Typography';
 import {IRequestInfo} from '../../../redux/dataTypes/request'
+import {FormType} from '../../Shared/Forms/FormRenderHelper';
 
 interface IProps {
     /** array of IRequestInfo objects representing each request items */
@@ -25,6 +26,7 @@ const RequestBody = (props: IProps) => {
             <RequestListSelection
                 detailsHref={'/post?title='} 
                 onItemDelete={()=>{}} 
+                formType={FormType.REQUEST}
                 {...other}
             />
         </>

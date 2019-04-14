@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
-import SideToolbar from '../../Shared/SideToolbar/index';
+import SideToolbar from '../SideToolbar';
 import RootRef from '@material-ui/core/RootRef';
 import { Subtract } from 'utility-types';
 
@@ -16,6 +16,8 @@ interface IEnhancedSelectableProps{
     detailsHref?: string;
     /** callback called when user creates a new item */
     onItemCreate: (newItem:any) => void;
+    /** FormType constant from 'FormRenderHelper.tsx' that identifies type of form to be rendered */
+    formType: string;
 }
 
 interface ISelectableState {
@@ -95,18 +97,28 @@ export const SelectableContainerHOC = <P extends IInjectedSelectableProps>(MainB
         }
         
         render(){
-            const {onItemDelete, onItemCreate, detailsHref, ...props} = this.props as IEnhancedSelectableProps;
+            const {onItemDelete, onItemCreate, detailsHref, formType, ...props} = this.props as IEnhancedSelectableProps;
             const {selectedRef} = this.state;
             
             return (
                 <Grid container direction="row" justify="flex-end"spacing={16}>
                     <Grid item xs={12} md={2}>
                         <RootRef rootRef={this.toolbarRef}>
-                            <SideToolbar detailsHref={detailsHref} selectedItemId={(selectedRef&&selectedRef.current)?selectedRef.current.id:null} onItemDelete={onItemDelete} onItemCreate={onItemCreate}/>
+                            <SideToolbar 
+                                detailsHref={detailsHref}
+                                selectedItemId={(selectedRef&&selectedRef.current)?selectedRef.current.id:null}
+                                onItemDelete={onItemDelete}
+                                onItemCreate={onItemCreate}
+                                formType={formType}
+                            />
                         </RootRef>
                     </Grid>
                     <Grid item xs={12} md={10}>
-                        <MainBodyComponent onItemSelect={this.handleSelect} selectedItemId={(selectedRef&&selectedRef.current)?selectedRef.current.id:null} {...props} />
+                        <MainBodyComponent
+                            onItemSelect={this.handleSelect}
+                            selectedItemId={(selectedRef&&selectedRef.current)?selectedRef.current.id:null}
+                            {...props}
+                        />
                     </Grid>
                 </Grid>
             )
