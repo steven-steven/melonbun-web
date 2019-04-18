@@ -4,15 +4,27 @@ import { storiesOf, addDecorator } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
 
-import SCreateItemPost, {CreateItemPost} from '../components/Shared/Dialogs/PopupDialog';
+import SPopupDialog, {PopupDialog} from '../components/Shared/Dialogs/PopupDialog';
+import * as FormRenderHelper from '../components/Shared/Forms/FormRenderHelper';
+import {FormType} from '../components/Shared/Forms/FormRenderHelper';
 
-storiesOf('Dialogs', module)
-    .add('CreateItemPost', () => (
-            <CreateItemPost onItemCreate={action('onItemCreate!')}/>
+storiesOf('Dialog', module)
+    .add('PopupDialog', () => (
+            <PopupDialog 
+                onSubmit={action('Submit Form!')}
+                formType={FormType.REQUEST}
+            />
         ),
         { info: {
-            text: 'Button + Popup dialog prompting users to create new items',
-            propTables: [CreateItemPost],
-            propTablesExclude: [SCreateItemPost], // do not display propTable for HOC
+            text: 'Popup that renders a specific form',
+            propTables: [PopupDialog],
+            propTablesExclude: [SPopupDialog], // do not display propTable for HOC
         }}
-    );
+    )
+    .add('Request Form', () => {
+        return (FormRenderHelper.RenderForm("REQUEST", {onFormSubmit: action('Submit Form!')}));
+    },
+    { info: {
+        text: 'Form Helper render prop function. Returns specific form based on the type specified.'
+    }}
+);
