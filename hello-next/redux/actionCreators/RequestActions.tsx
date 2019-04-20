@@ -1,5 +1,6 @@
 import * as RequestServices from '../services/requestServices';
 import {IRequestForm} from '../dataTypes/request';
+import * as NotificationActions from '../actioncreators/notificationActions'
 
 export const setRequestEntries = (requestList:any) => ({
     payload: {requestList},
@@ -12,7 +13,7 @@ export function initializeRequestEntries() {
 
         return RequestServices.getAllRequests().then(
             data => {
-                dispatch(setRequestEntries(data))
+                dispatch(setRequestEntries(data));
             }
         )
         .catch(function(error) {
@@ -27,7 +28,10 @@ export function createNewRequest(requestForm:IRequestForm) {
 
         return RequestServices.createNewRequest(requestForm).then(
             data => {
-                if(data) dispatch(initializeRequestEntries())
+                if(data) {
+                    dispatch(initializeRequestEntries());
+                    dispatch(NotificationActions.toastMessage("Request Created"))
+                }
             }
         )
         .catch(function(error) {

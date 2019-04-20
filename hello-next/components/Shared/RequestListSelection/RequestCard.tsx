@@ -88,8 +88,6 @@ export const RequestCard = (props: IProps) => {
                 image="/static/images/cards/apple.jpg"
                 title="Apple"
             />
-            
-                
             <div className={classNames(classes.details,classes.flexGrow)}>
                 <SelectableCard onCardSelect={onItemSelect} id={id} active={active}>
                     <CardContent className={classes.flexGrow}>
