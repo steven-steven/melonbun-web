@@ -1,11 +1,13 @@
-import NavBar from './NavBar/index'
+import NavBar from './NavBar'
 import Head from 'next/head';
 import { withStyles } from '@material-ui/core/styles';
 import React, {Component} from 'react';
 import classNames from 'classnames';
 import {drawerWidth} from './header_constants';
-import DrawerComponent from './Drawer/index';
+import DrawerComponent from './Drawer';
+import Toasts from '../../Shared/Toasts';
 import {connect} from 'react-redux';
+import {toastClear} from '../../../redux/actioncreators/notificationActions';
 
 const layoutStyle = (theme:any)=> ({
   root: {
@@ -49,13 +51,28 @@ interface IProps {
   /** indicate id Layout's children contains tabLayout component. Used to adjust spacing accordingly */
   hasTabLayout: boolean;
 }
+
+interface StateProps {
+  toast: any
+}
+     
+interface DispatchProps {
+  toastClear: ()=> void
+}
+type Props = StateProps & DispatchProps & IProps
+
 interface IState {
   isDrawerOpen: boolean;
   isLoggedIn: boolean;
 };
 
-export class Layout extends Component<IProps, IState>{
+export class Layout extends Component<Props, IState>{
   static defaultProps = {
+    toastClear: ()=>{},
+    toast:{
+      open: false,
+      message: ""
+    },
     hasTabLayout: false,
     classes: {
       root: '',
@@ -66,13 +83,12 @@ export class Layout extends Component<IProps, IState>{
     }
   }
 
-  constructor(props: IProps) {
+  constructor(props: Props) {
     super(props);
     this.state = {isDrawerOpen: false, isLoggedIn: false};
   }
 
   handleDrawerToggle = ()=>{
-    console.log("toggleDrawer");
     this.setState((prevState:IState)=>{
       return {isDrawerOpen : !prevState.isDrawerOpen};
     })
@@ -85,10 +101,10 @@ export class Layout extends Component<IProps, IState>{
     return (
       <>
         <Head>
-              <title>My page title</title>
+              <title>MelonBun</title>
         </Head>
         <div className={classes.root}>
-          <NavBar 
+          <NavBar
             handleDrawerToggle = {this.handleDrawerToggle}
             isDrawerOpen = {isDrawerOpen}
             isLoggedIn = {isLoggedIn}
@@ -106,19 +122,23 @@ export class Layout extends Component<IProps, IState>{
             <div className={classes.drawerHeader} />
             {this.props.children}
           </main>
+          <Toasts 
+            {...this.props.toast}
+            onRequestClose={this.props.toastClear.bind(this)}
+          />
         </div>
       </>
     )
   }
 }
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state):StateProps =>{
   return {
-    itemsBuffer: state.itemReducer.itemsBuffer
+    toast: state.notificationReducer.toast
   }
 }
-const mapDispatchToProps = {
-  
+const mapDispatchToProps:DispatchProps = {
+  toastClear
 }
 
 export const SLayout = withStyles(layoutStyle)(Layout)

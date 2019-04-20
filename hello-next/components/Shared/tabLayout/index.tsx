@@ -54,7 +54,7 @@ export class TabLayout extends Component<ITabLayoutProps, IState>{
                     <Tabs value={tabValue} onChange={this.handleChange} centered>
                         {tabContentList.map((tabItem) => {
                             const icon = tabItem.icon? <Icon>{tabItem.icon}</Icon> : '';
-                            return( <Tab icon={icon} label={`${tabItem.title}`} /> )
+                            return( <Tab key={tabItem.title} icon={icon} label={`${tabItem.title}`} /> )
                         })}
                     </Tabs>
                 </AppBar>
