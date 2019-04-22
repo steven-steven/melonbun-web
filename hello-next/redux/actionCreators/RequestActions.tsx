@@ -11,6 +11,7 @@ export function initializeRequestEntries() {
 
     return function (dispatch, getState) {
 
+        dispatch(NotificationActions.fetching());
         return RequestServices.getAllRequests().then(
             data => {
                 dispatch(setRequestEntries(data));
@@ -18,6 +19,9 @@ export function initializeRequestEntries() {
         )
         .catch(function(error) {
             console.log("Error: Failed to initialize requests - ", error);
+        })
+        .then(()=>{
+            dispatch(NotificationActions.fetchingDone());
         });
     };
 }

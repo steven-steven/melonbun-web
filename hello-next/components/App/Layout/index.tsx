@@ -53,11 +53,11 @@ interface IProps {
 }
 
 interface StateProps {
-  toast: any
+  toast: any;
 }
      
 interface DispatchProps {
-  toastClear: ()=> void
+  toastClear: ()=> void;
 }
 type Props = StateProps & DispatchProps & IProps
 

@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TabContainer from './TabContainer';
 import Icon from '@material-ui/core/Icon';
+import CircularIndeterminate from '../ProgressIndicator/circularIndeterminate';
 
 const TabLayoutStyle = (theme:any)=> ({
     root: {
@@ -26,6 +27,8 @@ export interface ITabLayoutProps {
     };
     /** array of ITabContent, object containing data for each tab */
     tabContentList: ITabContent[];
+    /** Indicate if asynchronous content fetching is occuring. If so display progress indicator */
+    isFetching?: boolean;
 }
 
 interface IState {
@@ -47,7 +50,7 @@ export class TabLayout extends Component<ITabLayoutProps, IState>{
 
     render(){
         const {tabValue} = this.state;
-        const {tabContentList, classes = defaultProps.classes} = this.props;
+        const {isFetching = defaultProps.isFetching, tabContentList, classes = defaultProps.classes} = this.props;
         return (
             <div className={classes.root}>
                 <AppBar position="static">
@@ -58,7 +61,12 @@ export class TabLayout extends Component<ITabLayoutProps, IState>{
                         })}
                     </Tabs>
                 </AppBar>
-                <TabContainer>{tabContentList[tabValue].content}</TabContainer>
+                <TabContainer>
+                    <>
+                        <CircularIndeterminate show={isFetching}/>
+                        {tabContentList[tabValue].content}
+                    </>
+                </TabContainer>
             </div>
         );
     }
@@ -67,7 +75,8 @@ export class TabLayout extends Component<ITabLayoutProps, IState>{
 const defaultProps = {
     classes:{
         root: ''
-    }
+    },
+    isFetching: false
 };
 
 export default withStyles(TabLayoutStyle)(TabLayout);

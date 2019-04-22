@@ -10,3 +10,6 @@ export function toastClear() {
         type: 'TOAST_CLEAR'
     };
 }
+
+export const fetching = () => ({ type: "FETCHING" });
+export const fetchingDone = () => ({ type: "FETCHING_DONE" });

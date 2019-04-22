@@ -3,9 +3,9 @@ import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 
-import SDrawerPanel, {DrawerPanel} from '../components/App/Layout/Drawer/index';
+import SDrawerPanel, {DrawerPanel} from '../components/App/Layout/Drawer';
 import SNavBar, {NavBar} from '../components/App/Layout/NavBar/index.tsx'
-import {SLayout, Layout} from '../components/App/Layout/index';
+import {SLayout, Layout} from '../components/App/Layout';
 import PopupMenu from '../components/App/Layout/NavBar/PopupMenu';
 
 storiesOf('Layout', module)
