@@ -9,17 +9,22 @@ import {IRequestInfo} from '../redux/dataTypes/request'
 import {onAddFavoriteRequest, onRemoveFavoriteRequest} from '../redux/actioncreators/profileActions';
 import {initializeRequestEntries, createNewRequest} from '../redux/actioncreators/RequestActions';
 
-
-interface IProps {
+interface StateProps {
     requestBuffer:IRequestInfo[];
     favoriteRequests: string[];
+    isFetching: boolean;
+}
+    
+interface DispatchProps {
     onAddFavoriteRequest: (requestId:string) => void;
     onRemoveFavoriteRequest: (requestId:string) => void;
     initializeRequestEntries: typeof initializeRequestEntries;
     createNewRequest: typeof createNewRequest;
 }
 
-export class Request extends Component<IProps>{
+type Props = StateProps & DispatchProps
+
+export class Request extends Component<Props>{
 
     componentWillMount() {
         const {initializeRequestEntries} = this.props;
@@ -27,7 +32,7 @@ export class Request extends Component<IProps>{
     }
 
     render(){
-        const { requestBuffer, favoriteRequests, onAddFavoriteRequest, onRemoveFavoriteRequest, createNewRequest} = this.props;
+        const { isFetching, requestBuffer, favoriteRequests, onAddFavoriteRequest, onRemoveFavoriteRequest, createNewRequest} = this.props;
 
         const RequestPage = <RequestBody 
             requestBuffer={requestBuffer} 
@@ -50,7 +55,7 @@ export class Request extends Component<IProps>{
 
         return (
             <Layout hasTabLayout={true}>
-                <TabLayout tabContentList={tabContentList}/>
+                <TabLayout isFetching={isFetching} tabContentList={tabContentList}/>
             </Layout>
         )
     }
@@ -59,7 +64,8 @@ export class Request extends Component<IProps>{
 const mapStateToProps = (state)=>{
     return {
         requestBuffer: state.requestReducer.requestBuffer,
-        favoriteRequests: state.profileReducer.favoriteRequests
+        favoriteRequests: state.profileReducer.favoriteRequests,
+        isFetching: state.notificationReducer.isFetching
     }
 }
 const mapDispatchToProps = {

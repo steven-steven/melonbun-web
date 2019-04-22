@@ -1,6 +1,4 @@
 import RequestListSelection from '../../Shared/RequestListSelection';
-
-import Typography from '@material-ui/core/Typography';
 import {IRequestInfo} from '../../../redux/dataTypes/request'
 import {FormType} from '../../Shared/Forms/FormRenderHelper';
 
@@ -22,7 +20,6 @@ const RequestBody = (props: IProps) => {
     const {...other} = props;
     return (
         <>
-            <Typography component="h3" variant="h3" gutterBottom>All Requests</Typography>
             <RequestListSelection
                 detailsHref={'/post?title='} 
                 onItemDelete={()=>{}} 

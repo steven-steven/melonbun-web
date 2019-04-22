@@ -21,4 +21,12 @@ storiesOf('TabLayout', module)
         ]
         
         return ( <STabLayout tabContentList={tabContentList}/> )
+    })
+    .add('TabLayout_isFetching', () => {
+        const tabContentList = [
+            {title:'Requests', content:(<p>Content 1</p>), icon:'assignment'},
+            {title:'Favorites', content:(<p>Content 2</p>), icon:'favorite'}
+        ]
+        
+        return ( <STabLayout isFetching={true} tabContentList={tabContentList}/> )
     });

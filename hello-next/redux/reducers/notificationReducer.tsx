@@ -2,7 +2,8 @@ const initialState = {
     toast: {
         message: '',
         open: false
-    }
+    },
+    isFetching: false
 };
 
 export default function (state = initialState, action) {
@@ -28,6 +29,22 @@ export default function (state = initialState, action) {
                         message: "",
                         open: false
                     }
+                };
+            }
+
+        case 'FETCHING':
+            {
+                return {
+                    ...state,
+                    isFetching: true
+                };
+            }
+
+        case 'FETCHING_DONE':
+            {
+                return {
+                    ...state,
+                    isFetching: false
                 };
             }
 

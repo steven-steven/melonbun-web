@@ -1,6 +1,6 @@
 // pages/index.tsx
-import Layout from '../components/App/Layout/index';
-import HomeBody from '../components/App/HomeBody/index';
+import Layout from '../components/App/Layout';
+import HomeBody from '../components/App/HomeBody';
 import {connect} from 'react-redux';
 import {onItemDelete, onItemCreate} from '../redux/actioncreators/cardActions';
 
