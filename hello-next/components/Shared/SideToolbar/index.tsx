@@ -12,7 +12,7 @@ import {NextLink} from '../nextLink';
 
 const toolbarStyle = (theme:any)=> ({
     root: {
-        height: 300,
+        height: "auto",
     },
 });
 

@@ -50,8 +50,8 @@ const myPages = [
     {'text':'Saved Items', 'href':'#', 'icon':'star'},
 ]
 const otherPages = [
-    {'text':'Post Requests', 'href':'/request'},
-    {'text':'Fullfill Requests', 'href':'/request'},
+    {'text':'Post Requests', 'href':'/item'},
+    {'text':'Fullfill Requests', 'href':'/item'},
     {'text':'Settings', 'href':'#'},
 ]
 

@@ -6,11 +6,11 @@ export const theme = {
     //type: 'dark',
     primary: {
         //light: '#61cf6c',
-        main: '#61cf6c',
-        //dark: '#39bb46'
+        main: '#FF9A42',
+        dark: '#CD773B'
     },
     secondary: {
-      main: '#f4a900',
+      main: '#4EA0A8',
     },
   },
   overrides: {

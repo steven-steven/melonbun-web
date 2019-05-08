@@ -55,6 +55,7 @@ export default class MyCustomDocument extends Document {
             name="theme-color"
             content={pageContext ? pageContext.theme.palette.primary.main : null}
           />
+          <link rel="icon" href="/static/images/logo.png" type="image/x-icon"/>
           {this.props.styleTags}
           {scripts}
         </Head>
