@@ -4,9 +4,11 @@ import storybookTheme from './storybookTheme';
 import {muiTheme} from 'storybook-addon-material-ui';
 import {theme} from '../helper/getPageContext';
 import { withInfo } from '@storybook/addon-info';
+import { withKnobs } from '@storybook/addon-knobs'
 
 addDecorator(withInfo);
 addDecorator(muiTheme([theme]));
+addDecorator(withKnobs);
 
 addParameters({
   options: {

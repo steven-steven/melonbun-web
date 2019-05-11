@@ -19,7 +19,9 @@ export interface IBannerProps {
         banner: string;
         bannerContent: string; 
     };
+    /** Text Description displayed on banner */
     description: string;
+    /** Title displayed on banner */
     title: string;
 }
 

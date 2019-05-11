@@ -3,6 +3,7 @@ import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
+import { boolean, text, number } from '@storybook/addon-knobs';
 
 import Toasts from '../components/Shared/Toasts';
 import SCircularIndeterminate, {CircularIndeterminate} from '../components/Shared/ProgressIndicator/circularIndeterminate';
@@ -10,9 +11,9 @@ import SCircularIndeterminate, {CircularIndeterminate} from '../components/Share
 storiesOf('Notifications', module)
     .add('Toasts', () => (
             <Toasts 
-                open = {true}
-                message = "Sample Notification Message"
-                duration = {4000}
+                open = {boolean('Open', true)}
+                message = {text('Message', 'Sample Notification Message')}
+                duration = {number('duration', 4000)}
                 onRequestClose={action('Close Toast')}
             />
         ),
@@ -22,7 +23,7 @@ storiesOf('Notifications', module)
         }}
     )
     .add('Circular - Indeterminate', () => (
-            <CircularIndeterminate show={true}/>
+            <CircularIndeterminate show={boolean('Show', true)}/>
         ),
         { info: {
             text: 'Circular indication when the page is loading. Indeterminate progress',

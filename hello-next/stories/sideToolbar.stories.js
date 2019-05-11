@@ -3,6 +3,7 @@ import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
+import { boolean } from '@storybook/addon-knobs';
 
 import Grid from '@material-ui/core/Grid';
 import SSideToolbar, {SideToolbar} from '../components/Shared/SideToolbar';
@@ -20,7 +21,7 @@ storiesOf('SideToolBar', module)
             <Grid item xs={12} md={2}>
                 <SSideToolbar  
                     detailsHref={'/post?title='}
-                    selectedItemId={'id'}
+                    selectedItemId={boolean('is item being selected', true)?'id':null}
                     onItemDelete={action('Item_Delete')} 
                     onItemCreate={action('Item_Create')}
                 />

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { storiesOf, addDecorator } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
+import { boolean } from '@storybook/addon-knobs';
 
 import SDrawerPanel, {DrawerPanel} from '../components/App/Layout/Drawer';
 import SNavBar, {NavBar} from '../components/App/Layout/NavBar/index.tsx'
@@ -32,8 +33,8 @@ storiesOf('Layout/NavBar', module)
     .add('NavBar', () => (
         <SNavBar
             handleDrawerToggle = {linkTo('Layout/NavBar', 'NavBar_Open')}
-            isDrawerOpen = {false}
-            isLoggedIn = {false}
+            isDrawerOpen = {boolean('isDrawerOpen', false)}
+            isLoggedIn = {boolean('isLoggedIn', false)}
         />
     ))
     .add('NavBar/PopupMenu', () => (
@@ -50,7 +51,7 @@ storiesOf('Layout/Drawer', module)
     })
     .add('Drawer', () => (
         <SDrawerPanel
-            show = {true}
+            show = {boolean('show', true)}
             handleDrawerToggle = {linkTo('Layout/NavBar', 'NavBar_Close')}
         />
     ));

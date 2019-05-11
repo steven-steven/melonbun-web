@@ -2,6 +2,7 @@ import React from 'react';
 
 import { storiesOf, addDecorator } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
+import { text } from '@storybook/addon-knobs';
 
 import {NextLink} from '../components/Shared/nextLink';
 import MuiLink from '@material-ui/core/Link';
@@ -14,12 +15,10 @@ storiesOf('NextLink', module)
         },
     })
     .add('NextLink', () => (
-        <NextLink href="#" className="myClass" hrefAs="#">Children</NextLink>
+        <NextLink href={`${text('Link Href', '#')}`} className="myClass" hrefAs="#">{text('Link text', 'Children')}</NextLink>
     ))
     .add('MuiLink wrapped in NextLink', () => (
         <MuiLink component={NextLink} href={'/'} variant="h6" color="inherit" underline="none">
             MelonBun
         </MuiLink>
     ));
-
-    
